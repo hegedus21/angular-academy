@@ -1,0 +1,185 @@
+{
+  "files": [
+    {
+      "path": "src/main.ts",
+      "name": "main.ts",
+      "category": "Belépési pont",
+      "desc": "Az alkalmazás indítása standalone módon: bootstrapApplication, provideRouter, provideHttpClient interceptorral.",
+      "concepts": [
+        "bootstrap",
+        "standalone",
+        "DI",
+        "provider"
+      ],
+      "lang": "typescript",
+      "code": "import { bootstrapApplication } from '@angular/platform-browser';\nimport { provideRouter } from '@angular/router';\nimport { provideHttpClient, withInterceptors } from '@angular/common/http';\nimport { AppComponent } from './app/app.component';\nimport { routes } from './app/app.routes';\nimport { authInterceptor } from './app/services/auth.interceptor';\n\n// Bootstrapping (Q80-81): az alkalmazás indítása standalone módon, NgModule nélkül\nbootstrapApplication(AppComponent, {\n  providers: [\n    provideRouter(routes),                              // Router beállítása\n    provideHttpClient(withInterceptors([authInterceptor])), // HttpClient + interceptor\n  ],\n}).catch(err => console.error(err));\n"
+    },
+    {
+      "path": "src/index.html",
+      "name": "index.html",
+      "category": "Belépési pont",
+      "desc": "A gyökér HTML, ahová az <app-root> renderelődik.",
+      "concepts": [
+        "alap"
+      ],
+      "lang": "html",
+      "code": "<!doctype html>\n<html lang=\"hu\">\n<head>\n  <meta charset=\"utf-8\" />\n  <title>Angular Mini Demo</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n</head>\n<body>\n  <!-- A root komponens selectora (Q6) -->\n  <app-root></app-root>\n</body>\n</html>\n"
+    },
+    {
+      "path": "src/app/app.component.ts",
+      "name": "app.component.ts",
+      "category": "Komponens",
+      "desc": "A root komponens: navigáció routerLinkkel és a <router-outlet> a nézetekhez.",
+      "concepts": [
+        "routing",
+        "komponens",
+        "template"
+      ],
+      "lang": "typescript",
+      "code": "import { Component } from '@angular/core';\nimport { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';\n\n// Root standalone komponens (Q39-40) - az app belépési nézete\n@Component({\n  selector: 'app-root',\n  standalone: true,\n  imports: [RouterOutlet, RouterLink, RouterLinkActive],\n  template: `\n    <h1>Angular Mini Demo</h1>\n    <nav>\n      <!-- routerLink (Q45): deklaratív navigáció -->\n      <a routerLink=\"/tasks\" routerLinkActive=\"active\">Feladatok</a> |\n      <a routerLink=\"/users\" routerLinkActive=\"active\">Felhasználók</a>\n    </nav>\n    <hr />\n    <!-- router-outlet (Q46): ide renderelődik a matched komponens -->\n    <router-outlet></router-outlet>\n  `,\n  styles: [`\n    nav a { text-decoration: none; margin: 0 4px; }\n    nav a.active { font-weight: bold; color: #1976d2; }\n    h1 { font-family: sans-serif; }\n  `],\n})\nexport class AppComponent {}\n"
+    },
+    {
+      "path": "src/app/app.routes.ts",
+      "name": "app.routes.ts",
+      "category": "Routing",
+      "desc": "Útvonalak: sima route, lazy loadComponent, guarddal védett útvonal, redirect és wildcard.",
+      "concepts": [
+        "routing",
+        "lazy-loading",
+        "guard"
+      ],
+      "lang": "typescript",
+      "code": "import { Routes } from '@angular/router';\nimport { TasksComponent } from './components/tasks.component';\nimport { authGuard } from './guards/auth.guard';\n\n// Route konfiguráció (Q43-44)\nexport const routes: Routes = [\n  { path: '', redirectTo: 'tasks', pathMatch: 'full' },\n  { path: 'tasks', component: TasksComponent },\n  {\n    path: 'users',\n    // Lazy loading (Q49): a komponens csak navigációkor töltődik be\n    loadComponent: () =>\n      import('./components/users.component').then(m => m.UsersComponent),\n    canActivate: [authGuard],   // route guard (Q47)\n  },\n  { path: '**', redirectTo: 'tasks' },  // wildcard route (Q50)\n];\n"
+    },
+    {
+      "path": "src/app/models/task.model.ts",
+      "name": "task.model.ts",
+      "category": "Modell",
+      "desc": "TypeScript interfészek (Task, User) és union literal típus a prioritáshoz.",
+      "concepts": [
+        "typescript",
+        "interfész",
+        "union"
+      ],
+      "lang": "typescript",
+      "code": "// TypeScript interfész (Q3) - statikus típusdefiníció\nexport interface Task {\n  id: number;\n  title: string;\n  done: boolean;\n  priority: 'low' | 'high';   // union típus\n}\n\nexport interface User {\n  id: number;\n  name: string;\n  email: string;\n}\n"
+    },
+    {
+      "path": "src/app/services/task.service.ts",
+      "name": "task.service.ts",
+      "category": "Service",
+      "desc": "Állapotkezelés BehaviorSubjecttel ÉS Signalokkal; a DI singleton minta példája.",
+      "concepts": [
+        "di",
+        "rxjs",
+        "signals",
+        "state"
+      ],
+      "lang": "typescript",
+      "code": "import { Injectable, signal, computed } from '@angular/core';\nimport { BehaviorSubject, Observable } from 'rxjs';\nimport { Task } from '../models/task.model';\n\n// @Injectable + providedIn:'root' (Q31-34) => alkalmazás-szintű singleton, tree-shakeable\n@Injectable({ providedIn: 'root' })\nexport class TaskService {\n  // BehaviorSubject (Q56): van kezdőérték, az utolsó értéket adja új feliratkozóknak\n  private tasksSubject = new BehaviorSubject<Task[]>([\n    { id: 1, title: 'Angular tanulás',   done: false, priority: 'high' },\n    { id: 2, title: 'RxJS gyakorlás',     done: true,  priority: 'low' },\n    { id: 3, title: 'Interview felkészülés', done: false, priority: 'high' },\n  ]);\n\n  // Observable (Q51-52): aszinkron adatfolyam, a komponens async pipe-pal fogyasztja\n  tasks$: Observable<Task[]> = this.tasksSubject.asObservable();\n\n  // Signal (Q76): reaktív primitív, finomabb change detection Zone.js nélkül\n  counter = signal(0);\n  doubleCounter = computed(() => this.counter() * 2); // computed signal\n\n  addTask(title: string): void {\n    const current = this.tasksSubject.value;\n    const newTask: Task = { id: Date.now(), title, done: false, priority: 'low' };\n    this.tasksSubject.next([...current, newTask]); // immutable frissítés\n  }\n\n  toggle(id: number): void {\n    const updated = this.tasksSubject.value.map(t =>\n      t.id === id ? { ...t, done: !t.done } : t\n    );\n    this.tasksSubject.next(updated);\n  }\n\n  increment(): void {\n    this.counter.update(v => v + 1);\n  }\n}\n"
+    },
+    {
+      "path": "src/app/services/user.service.ts",
+      "name": "user.service.ts",
+      "category": "Service",
+      "desc": "HttpClient GET inject()-tel, típusos válasz és catchError hibakezelés.",
+      "concepts": [
+        "http",
+        "di",
+        "rxjs"
+      ],
+      "lang": "typescript",
+      "code": "import { Injectable, inject } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable, catchError, of } from 'rxjs';\nimport { User } from '../models/task.model';\n\n@Injectable({ providedIn: 'root' })\nexport class UserService {\n  // inject() függvény (Q91): DI constructor nélkül\n  private http = inject(HttpClient);\n\n  // HttpClient (Q59): GET kérés, Observable-t ad vissza\n  getUsers(): Observable<User[]> {\n    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users').pipe(\n      // catchError (Q60): HTTP hibakezelés\n      catchError(() => of([{ id: 0, name: 'Hiba történt', email: '-' }]))\n    );\n  }\n}\n"
+    },
+    {
+      "path": "src/app/services/auth.interceptor.ts",
+      "name": "auth.interceptor.ts",
+      "category": "HTTP",
+      "desc": "Funkcionális HTTP interceptor: auth token hozzáadása a kérés klónozásával.",
+      "concepts": [
+        "http",
+        "interceptor"
+      ],
+      "lang": "typescript",
+      "code": "import { HttpInterceptorFn } from '@angular/common/http';\n\n// HTTP interceptor (Q61-62): kimenő kérések globális elfogása\n// Pl. auth token hozzáadása minden kéréshez (a request klónozásával)\nexport const authInterceptor: HttpInterceptorFn = (req, next) => {\n  const cloned = req.clone({\n    setHeaders: { Authorization: 'Bearer demo-token' },\n  });\n  return next(cloned);\n};\n"
+    },
+    {
+      "path": "src/app/directives/highlight.directive.ts",
+      "name": "highlight.directive.ts",
+      "category": "Direktíva",
+      "desc": "Egyéni attribútum direktíva: HostListener, HostBinding, ElementRef, Renderer2.",
+      "concepts": [
+        "direktíva",
+        "egyéni"
+      ],
+      "lang": "typescript",
+      "code": "import { Directive, HostListener, HostBinding, ElementRef, Renderer2, inject } from '@angular/core';\n\n// Egyéni ATTRIBÚTUM direktíva (Q17-18, Q23): megjelenést/viselkedést módosít\n@Directive({\n  selector: '[appHighlight]',\n  standalone: true,\n})\nexport class HighlightDirective {\n  private el = inject(ElementRef);      // ElementRef (Q85): natív DOM elem elérése\n  private renderer = inject(Renderer2); // Renderer2: biztonságos DOM manipuláció\n\n  // @HostBinding (Q24): a host elem property-jét köti\n  @HostBinding('style.cursor') cursor = 'pointer';\n\n  // @HostListener (Q24): host elem eseményeire figyel\n  @HostListener('mouseenter') onEnter(): void {\n    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', '#fff3cd');\n  }\n\n  @HostListener('mouseleave') onLeave(): void {\n    this.renderer.removeStyle(this.el.nativeElement, 'backgroundColor');\n  }\n}\n"
+    },
+    {
+      "path": "src/app/pipes/capitalize.pipe.ts",
+      "name": "capitalize.pipe.ts",
+      "category": "Pipe",
+      "desc": "Egyéni pipe a PipeTransform interfésszel.",
+      "concepts": [
+        "pipe",
+        "egyéni"
+      ],
+      "lang": "typescript",
+      "code": "import { Pipe, PipeTransform } from '@angular/core';\n\n// Egyéni pipe (Q68, Q71): adat transzformáció megjelenítéshez\n// Pure pipe (Q70): csak input referencia változásra fut (alap, gyors)\n@Pipe({\n  name: 'capitalize',\n  standalone: true,\n})\nexport class CapitalizePipe implements PipeTransform {\n  transform(value: string): string {\n    if (!value) return '';\n    return value.charAt(0).toUpperCase() + value.slice(1);\n  }\n}\n"
+    },
+    {
+      "path": "src/app/guards/auth.guard.ts",
+      "name": "auth.guard.ts",
+      "category": "Guard",
+      "desc": "Funkcionális CanActivateFn guard inject()-tel.",
+      "concepts": [
+        "routing",
+        "guard",
+        "di"
+      ],
+      "lang": "typescript",
+      "code": "import { CanActivateFn } from '@angular/router';\n\n// Route guard (Q47) - funkcionális CanActivate (modern szintaxis)\n// Eldönti, engedélyezett-e a navigáció az adott route-ra\nexport const authGuard: CanActivateFn = () => {\n  const isLoggedIn = true; // valós appban: AuthService.isLoggedIn()\n  return isLoggedIn;\n};\n"
+    },
+    {
+      "path": "src/app/components/task-item.component.ts",
+      "name": "task-item.component.ts",
+      "category": "Komponens",
+      "desc": "Buta (presentational) komponens: Input/Output/EventEmitter, OnPush, ng-content.",
+      "concepts": [
+        "komponens",
+        "kommunikáció",
+        "onpush"
+      ],
+      "lang": "typescript",
+      "code": "import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';\nimport { Task } from '../models/task.model';\nimport { HighlightDirective } from '../directives/highlight.directive';\nimport { CapitalizePipe } from '../pipes/capitalize.pipe';\n\n// Standalone gyerek komponens (Q6, Q40) - \"dumb/presentational\" komponens (Q96)\n@Component({\n  selector: 'app-task-item',\n  standalone: true,\n  imports: [HighlightDirective, CapitalizePipe],\n  // OnPush change detection (Q74-75): csak @Input referencia változásra fut => gyorsabb\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <li appHighlight [class.done]=\"task.done\">\n      <!-- Property binding (Q14) -->\n      <input type=\"checkbox\" [checked]=\"task.done\"\n             (change)=\"toggle.emit(task.id)\" />\n      <!-- Interpoláció + egyéni pipe (Q68) -->\n      {{ task.title | capitalize }}\n      <small>[{{ task.priority }}]</small>\n      <!-- ng-content: content projection (Q30) -->\n      <ng-content></ng-content>\n    </li>\n  `,\n  styles: [`.done { text-decoration: line-through; opacity: .6; }`],\n})\nexport class TaskItemComponent {\n  // @Input (Q25): szülő -> gyerek adatátadás\n  @Input({ required: true }) task!: Task;\n\n  // @Output (Q26): gyerek -> szülő eseménykibocsátás EventEmitter-rel\n  @Output() toggle = new EventEmitter<number>();\n}\n"
+    },
+    {
+      "path": "src/app/components/tasks.component.ts",
+      "name": "tasks.component.ts",
+      "category": "Komponens",
+      "desc": "Okos komponens: reactive form, ViewChild, async pipe, @for/@if, lifecycle, Signals.",
+      "concepts": [
+        "komponens",
+        "forms",
+        "rxjs",
+        "signals",
+        "control-flow"
+      ],
+      "lang": "typescript",
+      "code": "import { Component, OnInit, OnDestroy, ViewChild, ElementRef, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';\nimport { Subscription } from 'rxjs';\nimport { TaskService } from '../services/task.service';\nimport { TaskItemComponent } from './task-item.component';\n\n// \"Smart/container\" komponens (Q96): állapotot és logikát kezel\n@Component({\n  selector: 'app-tasks',\n  standalone: true,\n  imports: [CommonModule, ReactiveFormsModule, TaskItemComponent],\n  template: `\n    <h2>Feladatok</h2>\n\n    <!-- Reactive form (Q63-66): FormControl + beépített validátor -->\n    <input #titleInput [formControl]=\"title\" placeholder=\"Új feladat...\" />\n    <button (click)=\"add()\" [disabled]=\"title.invalid\">Hozzáad</button>\n    <!-- ngIf régi vs @if új control flow (Q19, Q93) -->\n    @if (title.invalid && title.touched) {\n      <span class=\"err\">Min. 3 karakter!</span>\n    }\n\n    <!-- async pipe (Q55): auto subscribe + unsubscribe a template-ben -->\n    <ul>\n      @for (task of (tasks$ | async); track task.id) {   <!-- @for + track (Q20-21) -->\n        <app-task-item [task]=\"task\" (toggle)=\"onToggle($event)\">\n          <em>#{{ task.id }}</em>\n        </app-task-item>\n      } @empty {\n        <li>Nincs feladat</li>\n      }\n    </ul>\n\n    <!-- Signals (Q76): reaktív számláló, Zone.js nélkül -->\n    <p>Signal számláló: {{ svc.counter() }} (dupla: {{ svc.doubleCounter() }})</p>\n    <button (click)=\"svc.increment()\">+1</button>\n  `,\n  styles: [`.err { color: red; margin-left: 8px; } h2 { color: #1976d2; }`],\n})\nexport class TasksComponent implements OnInit, OnDestroy {\n  svc = inject(TaskService);\n  tasks$ = this.svc.tasks$;\n  private sub?: Subscription;\n\n  // FormControl validátorral (Q66)\n  title = new FormControl('', [Validators.required, Validators.minLength(3)]);\n\n  // @ViewChild (Q28): hozzáférés template elemhez\n  @ViewChild('titleInput') titleInput!: ElementRef<HTMLInputElement>;\n\n  // ngOnInit (Q9): inicializálás miután az input propertyk beálltak\n  ngOnInit(): void {\n    // Manuális subscribe példa -> ngOnDestroy-ban leiratkozunk (Q54)\n    this.sub = this.tasks$.subscribe();\n  }\n\n  add(): void {\n    if (this.title.valid) {\n      this.svc.addTask(this.title.value!.trim());\n      this.title.reset();\n      this.titleInput.nativeElement.focus(); // ViewChild használat\n    }\n  }\n\n  onToggle(id: number): void {\n    this.svc.toggle(id);\n  }\n\n  // ngOnDestroy (Q10): takarítás, memory leak megelőzés\n  ngOnDestroy(): void {\n    this.sub?.unsubscribe();\n  }\n}\n"
+    },
+    {
+      "path": "src/app/components/users.component.ts",
+      "name": "users.component.ts",
+      "category": "Komponens",
+      "desc": "HTTP-adat megjelenítése service-en át, async pipe-pal; lazy-load célpont.",
+      "concepts": [
+        "komponens",
+        "http",
+        "lazy-loading"
+      ],
+      "lang": "typescript",
+      "code": "import { Component, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { UserService } from '../services/user.service';\n\n// Ez a komponens LAZY LOADING-gal töltődik be (Q49) - lásd app.routes.ts\n@Component({\n  selector: 'app-users',\n  standalone: true,\n  imports: [CommonModule],\n  template: `\n    <h2>Felhasználók (HTTP)</h2>\n    <!-- async pipe (Q55) az Observable-höz, @for + @empty control flow -->\n    <ul>\n      @for (user of (users$ | async); track user.id) {\n        <li>{{ user.name }} — <small>{{ user.email }}</small></li>\n      } @empty {\n        <li>Betöltés...</li>\n      }\n    </ul>\n  `,\n  styles: [`h2 { color: #1976d2; }`],\n})\nexport class UsersComponent {\n  private userService = inject(UserService);\n  users$ = this.userService.getUsers(); // Observable a HTTP GET-ből\n}\n"
+    }
+  ]
+}
