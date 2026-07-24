@@ -1,0 +1,2308 @@
+{
+  "meta": {
+    "total": 166,
+    "topics": [
+      {
+        "id": "basics",
+        "name": "Alapok",
+        "desc": "Mi az Angular, SPA, keretrendszer-filozófia"
+      },
+      {
+        "id": "typescript",
+        "name": "TypeScript",
+        "desc": "Típusok, interfészek, dekorátorok, generics"
+      },
+      {
+        "id": "components",
+        "name": "Komponensek",
+        "desc": "Felépítés, lifecycle, template, stílus"
+      },
+      {
+        "id": "templates",
+        "name": "Templatek és binding",
+        "desc": "Data binding, control flow, referenciák"
+      },
+      {
+        "id": "directives",
+        "name": "Direktívák",
+        "desc": "Strukturális, attribútum, egyéni direktívák"
+      },
+      {
+        "id": "communication",
+        "name": "Komponens kommunikáció",
+        "desc": "Input/Output, ViewChild, content projection"
+      },
+      {
+        "id": "di",
+        "name": "Dependency Injection",
+        "desc": "Service-ek, injectorok, providerek, tokenek"
+      },
+      {
+        "id": "modules",
+        "name": "Modulok és standalone",
+        "desc": "NgModule, standalone, bootstrap"
+      },
+      {
+        "id": "routing",
+        "name": "Routing",
+        "desc": "Route-ok, guardok, lazy loading, paraméterek"
+      },
+      {
+        "id": "rxjs",
+        "name": "RxJS és Observables",
+        "desc": "Observable, operátorok, Subjectek"
+      },
+      {
+        "id": "http",
+        "name": "HTTP",
+        "desc": "HttpClient, interceptorok, hibakezelés"
+      },
+      {
+        "id": "forms",
+        "name": "Forms",
+        "desc": "Template-driven, reactive, validáció"
+      },
+      {
+        "id": "pipes",
+        "name": "Pipes",
+        "desc": "Beépített és egyéni pipe-ok"
+      },
+      {
+        "id": "change",
+        "name": "Change Detection",
+        "desc": "Zone.js, OnPush, Signals"
+      },
+      {
+        "id": "signals",
+        "name": "Signals",
+        "desc": "signal, computed, effect, reaktivitás"
+      },
+      {
+        "id": "performance",
+        "name": "Teljesítmény",
+        "desc": "Optimalizálás, lazy loading, bundle"
+      },
+      {
+        "id": "testing",
+        "name": "Tesztelés",
+        "desc": "Unit, TestBed, e2e"
+      },
+      {
+        "id": "ssr",
+        "name": "SSR és haladó",
+        "desc": "Universal, hydration, defer"
+      },
+      {
+        "id": "tooling",
+        "name": "Eszközök és CLI",
+        "desc": "Angular CLI, build, AOT/JIT"
+      },
+      {
+        "id": "architecture",
+        "name": "Architektúra",
+        "desc": "Best practices, minták, skálázás"
+      }
+    ],
+    "levelCounts": {
+      "junior": 53,
+      "medior": 73,
+      "senior": 40
+    },
+    "topicCounts": {
+      "basics": 11,
+      "typescript": 11,
+      "components": 14,
+      "templates": 9,
+      "directives": 8,
+      "communication": 9,
+      "di": 11,
+      "modules": 4,
+      "routing": 10,
+      "rxjs": 15,
+      "http": 8,
+      "forms": 9,
+      "pipes": 6,
+      "change": 8,
+      "signals": 6,
+      "performance": 8,
+      "testing": 5,
+      "ssr": 4,
+      "tooling": 4,
+      "architecture": 6
+    },
+    "generated": "Angular Academy tudástár"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "topic": "basics",
+      "level": "junior",
+      "q": "Mi az Angular?",
+      "a": "Az Angular a Google által fejlesztett, TypeScript-alapú, nyílt forráskódú frontend keretrendszer egyoldalas alkalmazások (SPA) építésére. Nem csupán egy UI-könyvtár: teljes ökoszisztéma, amely dobozból tartalmaz routingot, dependency injectiont, űrlapkezelést, HTTP klienst, tesztelési eszközöket és egy erős CLI-t. A komponens-alapú architektúra köré épül, ahol az alkalmazás újrafelhasználható, egymásba ágyazható komponensekből áll össze. Az Angular \"opinionated\" (véleményes) keretrendszer: határozott mintákat és struktúrát ad, ami nagy csapatoknál és nagy kódbázisoknál egységességet és karbantarthatóságot eredményez.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "definíció"
+      ]
+    },
+    {
+      "id": 2,
+      "topic": "basics",
+      "level": "junior",
+      "q": "Mi a különbség az Angular és az AngularJS között?",
+      "a": "Az AngularJS az első generáció (1.x), amely tiszta JavaScriptre épült, és olyan fogalmakkal dolgozott, mint a $scope, a controllerek és a kétirányú digest-ciklus. Az Angular (2-es verziótól, ma már 18+) egy teljes újraírás: TypeScript-alapú, komponens-orientált, sokkal gyorsabb change detectionnel, jobb mobiltámogatással és moduláris felépítéssel. A kettő nem kompatibilis egymással. A gyakorlatban ha valaki csak \"Angular\"-t mond, ma szinte mindig a 2+ verziót érti, az AngularJS pedig már kifutott (end-of-life).",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "történet"
+      ]
+    },
+    {
+      "id": 3,
+      "topic": "basics",
+      "level": "junior",
+      "q": "Mi az az SPA (Single Page Application)?",
+      "a": "Az SPA egy olyan webalkalmazás, amely egyetlen HTML-oldalt tölt be, majd a felhasználói interakciókra a tartalmat dinamikusan, JavaScripttel cseréli ki teljes oldalújratöltés nélkül. A navigáció a kliensoldalon történik (a router kezeli), így az élmény gyorsabb és gördülékenyebb, közelebb a natív app érzéséhez. Hátránya lehet a lassabb kezdeti betöltés és a SEO-kihívások, amit az Angular SSR-rel (server-side rendering) old meg. Az Angular alapból SPA-kat épít.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "spa"
+      ]
+    },
+    {
+      "id": 4,
+      "topic": "basics",
+      "level": "medior",
+      "q": "Mik az Angular fő építőelemei?",
+      "a": "Az Angular fő építőelemei: komponensek (UI + logika), templatek (a komponens nézete), direktívák (DOM-viselkedés), pipe-ok (adattranszformáció megjelenítéshez), service-ek (megosztott logika/állapot), a dependency injection rendszer (függőségek beszúrása), és a router (navigáció). Régebben az NgModule is központi elem volt, de a modern Angularban (v17+) a standalone komponensek átveszik a szerepét. Ezek együtt alkotnak egy komponensfát, amelynek gyökere az alkalmazás root komponense.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "architektúra"
+      ]
+    },
+    {
+      "id": 5,
+      "topic": "basics",
+      "level": "medior",
+      "q": "Miért TypeScriptet használ az Angular JavaScript helyett?",
+      "a": "A TypeScript statikus típusozást ad a JavaScript fölé, ami fordítási időben elkapja a hibák nagy részét, mielőtt futásidőben jelentkeznének. Ez nagy kódbázisoknál és csapatmunkában óriási előny: jobb IDE-támogatás (autocomplete, refaktorálás), önjavító dokumentáció a típusokon keresztül, és biztonságosabb változtatások. Az Angular emellett dekorátorokra épül (@Component, @Injectable), amelyek szintén TypeScript-funkciók. A böngésző végül sima JavaScriptet kap, mert a TypeScript arra fordul le.",
+      "code": "// A típus fordítási időben véd:\ninterface Task { id: number; title: string; done: boolean; }\n\nfunction toggle(t: Task) { t.done = !t.done; }\ntoggle({ id: 1, title: 'X' }); // FORDÍTÁSI HIBA: hiányzik a 'done'",
+      "appFile": "src/app/models/task.model.ts",
+      "tags": [
+        "alap",
+        "typescript"
+      ]
+    },
+    {
+      "id": 6,
+      "topic": "basics",
+      "level": "senior",
+      "q": "Mikor NEM választanád az Angulart egy projekthez?",
+      "a": "Az Angular teljes súlya nem mindig indokolt. Egy apró statikus oldalhoz, landing page-hez vagy néhány interaktív elemhez a keretrendszer betöltési és tanulási költsége túlzás lehet — ott vanilla JS, egy könnyű könyvtár (pl. Alpine.js), vagy egy egyszerűbb megoldás elég. Nagyon SEO-kritikus, tartalom-központú oldalaknál egy SSR-first megoldás (pl. statikus generátor) is versenyképes. Az Angulart ott érdemes választani, ahol a méret, a hosszú távú karbantartás, egy nagyobb csapat és a komplex, állapot-nehéz UI indokolja a struktúrát és a beépített eszközkészletet. A senior gondolkodás lényege: az eszközt a feladathoz választjuk, nem fordítva.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "döntés",
+        "architektúra"
+      ]
+    },
+    {
+      "id": 7,
+      "topic": "typescript",
+      "level": "junior",
+      "q": "Mi az interfész a TypeScriptben, és mire használod Angularban?",
+      "a": "Az interfész egy típus-szerződés: leírja, milyen mezőknek és milyen típussal kell lenniük egy objektumban, de nem generál futásidejű kódot (törlődik a fordításnál). Angularban jellemzően adatmodellek leírására használjuk — pl. egy API-válasz alakja, egy komponens bemenete. Ez dokumentál és véd: ha rossz alakú objektumot adsz át, a fordító szól.",
+      "code": "export interface User {\n  id: number;\n  name: string;\n  email: string;\n}",
+      "appFile": "src/app/models/task.model.ts",
+      "tags": [
+        "typescript",
+        "interfész"
+      ]
+    },
+    {
+      "id": 8,
+      "topic": "typescript",
+      "level": "junior",
+      "q": "Mi a különbség az interface és a type között?",
+      "a": "Mindkettő típust definiál. Az interface elsősorban objektum-alakokra való, kiterjeszthető (extends) és deklaráció-egyesítést (declaration merging) támogat. A type alias rugalmasabb: union típusok, intersection, primitívek, tuple-ök is leírhatók vele. A gyakorlatban objektum-modellekhez gyakran interface-t, union/komplex kombinációkhoz type-ot használunk. A kettő sokszor felcserélhető; a csapaton belüli konzisztencia a fontos.",
+      "code": "type Priority = 'low' | 'high';        // union -> type\ninterface Task { priority: Priority; }  // objektum -> interface",
+      "appFile": null,
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "id": 9,
+      "topic": "typescript",
+      "level": "medior",
+      "q": "Mik a dekorátorok, és hogyan használja őket az Angular?",
+      "a": "A dekorátor egy speciális függvény, amely metaadatot csatol egy osztályhoz, property-hez, metódushoz vagy paraméterhez. Az Angular erősen épít rájuk: a @Component egy osztályt komponenssé tesz és megadja a selectorát/templatejét, az @Injectable jelzi, hogy egy osztály injektálható, az @Input/@Output a komponens-kommunikációt jelöli. A dekorátorok TypeScript- (illetve részben jövőbeli JS-) funkciók, amelyeket az Angular fordítója értelmez.",
+      "code": "@Component({\n  selector: 'app-root',\n  standalone: true,\n  template: `<h1>Hello</h1>`,\n})\nexport class AppComponent {}",
+      "appFile": "src/app/app.component.ts",
+      "tags": [
+        "typescript",
+        "dekorátor"
+      ]
+    },
+    {
+      "id": 10,
+      "topic": "typescript",
+      "level": "medior",
+      "q": "Mik a generics, és miért hasznosak Angularban?",
+      "a": "A generics típus-paraméterek: lehetővé teszik, hogy egy függvény vagy osztály többféle típussal is típusbiztosan működjön. Angularban tipikus példa a HttpClient: a http.get<User[]>(url) megmondja, hogy a válasz User tömb lesz, így a lánc végén típusos adatot kapsz autocomplete-tel. Generics nélkül mindent any-ként kezelnél, elveszítve a fordítói védelmet.",
+      "code": "getUsers(): Observable<User[]> {\n  return this.http.get<User[]>('/api/users');\n}",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "typescript",
+        "generics"
+      ]
+    },
+    {
+      "id": 11,
+      "topic": "typescript",
+      "level": "medior",
+      "q": "Mit jelentenek a union és literal típusok?",
+      "a": "A union típus (A | B) azt jelenti, hogy egy érték több típus valamelyike lehet. A literal típus konkrét értékekre szűkít, pl. 'low' | 'high' csak ezt a két stringet engedi. Együtt remekül modellezik a véges állapotokat: a fordító hibát jelez, ha érvénytelen értéket adsz, és a szerkesztő felkínálja a lehetőségeket. Ez tisztább, mint a nyers stringek vagy enumok sok esetben.",
+      "code": "priority: 'low' | 'high';   // csak e kettő engedélyezett",
+      "appFile": "src/app/models/task.model.ts",
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "id": 12,
+      "topic": "typescript",
+      "level": "senior",
+      "q": "Mire valók a segéd- (utility) típusok, mint a Partial, Pick, Omit?",
+      "a": "A utility típusok meglévő típusokból származtatnak újakat, csökkentve a duplikációt. A Partial<T> minden mezőt opcionálissá tesz (jó részleges frissítéshez), a Pick<T, K> kiválasztott mezőket emel ki, az Omit<T, K> elhagy mezőket, a Readonly<T> írásvédetté tesz. Angularban tipikus: egy frissítő függvény Partial<User>-t fogad, vagy egy DTO Omit<User, 'id'> alakú. Ez a típusrendszer erejét használja ki a karbantarthatóságért.",
+      "code": "function updateUser(id: number, changes: Partial<User>) { /* ... */ }\ntype NewUser = Omit<User, 'id'>; // id nélküli létrehozáshoz",
+      "appFile": null,
+      "tags": [
+        "typescript",
+        "haladó"
+      ]
+    },
+    {
+      "id": 13,
+      "topic": "typescript",
+      "level": "senior",
+      "q": "Mi a strict mód a TypeScriptben, és miért érdemes bekapcsolni?",
+      "a": "A strict mód szigorúbb típusellenőrzést kapcsol be (strictNullChecks, noImplicitAny, strictPropertyInitialization stb.). Ez több hibát fog el fordítási időben: null/undefined szivárgásokat, inicializálatlan property-ket, implicit any-t. Angular projektek alapból strict módban generálódnak. A kezdeti extra munka bőven megtérül nagy kódbázisban, mert a hibák a fejlesztőnél buknak ki, nem a felhasználónál. Senior szempont: a strict a technikai adósság elleni olcsó biztosítás.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "typescript",
+        "haladó"
+      ]
+    },
+    {
+      "id": 14,
+      "topic": "components",
+      "level": "junior",
+      "q": "Mi a komponens az Angularban?",
+      "a": "A komponens az Angular alapvető UI-építőeleme: egy TypeScript osztály @Component dekorátorral, amely összeköti a logikát (osztály), a nézetet (template) és a stílust (CSS). Minden komponensnek van egy selectora, amivel a HTML-be beilleszthető (pl. <app-tasks>). A komponensek egymásba ágyazhatók, így épül fel a komponensfa. A jó komponens egy jól körülhatárolt felelősséggel bír.",
+      "code": "@Component({\n  selector: 'app-users',\n  standalone: true,\n  template: `<h2>Felhasználók</h2>`,\n})\nexport class UsersComponent {}",
+      "appFile": "src/app/components/users.component.ts",
+      "tags": [
+        "komponens",
+        "alap"
+      ]
+    },
+    {
+      "id": 15,
+      "topic": "components",
+      "level": "junior",
+      "q": "Melyek a @Component dekorátor legfontosabb mezői?",
+      "a": "A leggyakoribbak: selector (hogyan hivatkozunk rá a HTML-ben), template vagy templateUrl (a nézet inline vagy külön fájlból), styles vagy styleUrls (CSS), standalone (modul nélküli komponens jelzése), és imports (standalone esetén a felhasznált komponensek/direktívák/pipe-ok). Ezek adják meg, hogyan néz ki és viselkedik a komponens.",
+      "code": "@Component({\n  selector: 'app-tasks',\n  standalone: true,\n  imports: [CommonModule, ReactiveFormsModule],\n  templateUrl: './tasks.component.html',\n  styleUrls: ['./tasks.component.css'],\n})",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "komponens"
+      ]
+    },
+    {
+      "id": 16,
+      "topic": "components",
+      "level": "medior",
+      "q": "Mi a komponens életciklusa (lifecycle hooks)?",
+      "a": "Az Angular a komponens élete során meghatározott sorrendben hív meg életciklus-metódusokat: ngOnChanges (input változáskor), ngOnInit (első inicializálás, mire az inputok beálltak), ngDoCheck (minden change detection ciklusban), ngAfterContentInit / ngAfterContentChecked (a vetített tartalomhoz), ngAfterViewInit / ngAfterViewChecked (a saját nézethez és gyerekekhez), végül ngOnDestroy (megsemmisüléskor, takarításhoz). A leggyakrabban használt az ngOnInit és az ngOnDestroy.",
+      "code": "export class TasksComponent implements OnInit, OnDestroy {\n  ngOnInit()   { /* inicializálás */ }\n  ngOnDestroy(){ /* takarítás, unsubscribe */ }\n}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "komponens",
+        "lifecycle"
+      ]
+    },
+    {
+      "id": 17,
+      "topic": "components",
+      "level": "medior",
+      "q": "Mi a különbség a constructor és az ngOnInit között?",
+      "a": "A constructor a JavaScript/TypeScript osztály része: az objektum példányosításakor fut, és itt történik a dependency injection. Ekkor viszont az @Input propertyk MÉG nincsenek beállítva. Az ngOnInit egy Angular lifecycle hook, amely azután fut, hogy az inputok megérkeztek — ezért az adatlekérést, inicializálást ide tesszük. Ökölszabály: a constructorba csak a függőségek bekérése kerüljön, minden más az ngOnInitbe.",
+      "code": "constructor(private svc: TaskService) {}   // csak DI\n\nngOnInit(): void {\n  this.tasks = this.svc.load();             // inicializálás\n}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "komponens",
+        "lifecycle"
+      ]
+    },
+    {
+      "id": 18,
+      "topic": "components",
+      "level": "medior",
+      "q": "Miért fontos az ngOnDestroy?",
+      "a": "Az ngOnDestroy a komponens megsemmisülésekor fut, és a takarítás helye: manuális RxJS-feliratkozások leiratkozása, időzítők (setInterval) törlése, event listenerek eltávolítása, WebSocket-kapcsolatok zárása. Ha ezt elmulasztod, memory leak keletkezik: a megsemmisült komponens erőforrásai életben maradnak, ami idővel lassuláshoz, akár összeomláshoz vezet. A legtisztább megelőzés az async pipe vagy a takeUntilDestroyed használata, ami automatikusan leiratkozik.",
+      "code": "private sub = new Subscription();\nngOnDestroy(): void {\n  this.sub.unsubscribe();\n}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "komponens",
+        "lifecycle",
+        "memory-leak"
+      ]
+    },
+    {
+      "id": 19,
+      "topic": "components",
+      "level": "medior",
+      "q": "Mik a view encapsulation módok?",
+      "a": "A view encapsulation azt szabályozza, hogyan érvényesül egy komponens CSS-e. Emulated (alapértelmezett): az Angular egyedi attribútumokkal scope-olja a stílusokat, így azok csak az adott komponensre hatnak — Shadow DOM nélkül. None: a stílusok globálisak lesznek, kiszivárognak más komponensekre is. ShadowDom: valódi natív Shadow DOM-ot használ, teljes izolációval. A legtöbb esetben az Emulated a jó választás.",
+      "code": "@Component({\n  encapsulation: ViewEncapsulation.Emulated, // alap\n  // None | ShadowDom\n})",
+      "appFile": null,
+      "tags": [
+        "komponens",
+        "css"
+      ]
+    },
+    {
+      "id": 20,
+      "topic": "components",
+      "level": "senior",
+      "q": "Mi a smart (container) és dumb (presentational) komponens minta?",
+      "a": "Ez egy bevált szeparációs minta. A smart/container komponens kezeli az állapotot, kommunikál service-ekkel, adatot tölt, és eseményeket dolgoz fel. A dumb/presentational komponens csak megjelenít: @Input-on kapja az adatot, @Output-on jelez eseményt, nincs saját üzleti logikája vagy service-függősége. Előnye: a dumb komponensek könnyen tesztelhetők és újrahasznosíthatók, a logika pedig egy helyre koncentrálódik. Ez javítja a karbantarthatóságot és a tesztelhetőséget nagy alkalmazásban.",
+      "code": "// Dumb: csak Input/Output\n@Component({ selector: 'app-task-item' })\nexport class TaskItemComponent {\n  @Input() task!: Task;\n  @Output() toggle = new EventEmitter<number>();\n}",
+      "appFile": "src/app/components/task-item.component.ts",
+      "tags": [
+        "komponens",
+        "architektúra",
+        "minta"
+      ]
+    },
+    {
+      "id": 21,
+      "topic": "components",
+      "level": "senior",
+      "q": "Hogyan optimalizálnál egy komponenst, ami sok elemet renderel?",
+      "a": "Több eszköz van: (1) OnPush change detection, hogy csak referencia-változáskor ellenőrizzen; (2) trackBy/track a listáknál, hogy az Angular ne renderelje újra a teljes listát; (3) virtuális görgetés (CDK Virtual Scroll), hogy csak a látható elemek legyenek a DOM-ban; (4) a nehéz számításokat memoizált pipe-ba vagy computed signalba tenni, ne a template-ben végezni; (5) @defer blokkal késleltetni a nehéz részek betöltését. A kulcs: előbb mérni (profiler), aztán célzottan optimalizálni.",
+      "code": "@for (item of items; track item.id) { ... }  // trackBy",
+      "appFile": null,
+      "tags": [
+        "komponens",
+        "teljesítmény",
+        "haladó"
+      ]
+    },
+    {
+      "id": 22,
+      "topic": "templates",
+      "level": "junior",
+      "q": "Mi a data binding, és milyen fajtái vannak?",
+      "a": "A data binding a komponens osztálya és a template közötti adatáramlás. Négy fő fajta: (1) interpoláció {{ érték }} — érték kiírása a DOM-ba; (2) property binding [prop]=\"érték\" — komponens -> DOM property; (3) event binding (event)=\"handler()\" — DOM -> komponens esemény; (4) two-way binding [(ngModel)]=\"érték\" — kétirányú szinkronizáció, ami valójában a property és event binding kombinációja.",
+      "code": "{{ title }}                          <!-- interpoláció -->\n<img [src]=\"imageUrl\" />             <!-- property -->\n<button (click)=\"save()\">Ment</button> <!-- event -->\n<input [(ngModel)]=\"name\" />         <!-- two-way -->",
+      "appFile": "src/app/components/task-item.component.ts",
+      "tags": [
+        "template",
+        "binding",
+        "alap"
+      ]
+    },
+    {
+      "id": 23,
+      "topic": "templates",
+      "level": "junior",
+      "q": "Mi az interpoláció?",
+      "a": "Az interpoláció a {{ }} szintaxis, amellyel a komponens egy értékét szövegként beszúrjuk a template-be. Az Angular kiértékeli a kifejezést és stringgé alakítja. Egyszerű kifejezések lehetnek benne (pl. {{ user.name }} vagy {{ price * 1.27 }}), de kerülni kell a bonyolult logikát vagy mellékhatásokat — azt a komponens osztályba tesszük.",
+      "code": "<p>Üdv, {{ user.name }}! Egyenleg: {{ balance | currency }}</p>",
+      "appFile": null,
+      "tags": [
+        "template",
+        "binding"
+      ]
+    },
+    {
+      "id": 24,
+      "topic": "templates",
+      "level": "medior",
+      "q": "Mi a különbség a property binding és az attribútum binding között?",
+      "a": "A property binding [prop] a DOM-elem JavaScript property-jét állítja (pl. [value], [disabled]), ami a valós, élő állapot. Az attribútum binding [attr.xxx] a HTML-attribútumot állítja, és akkor kell, ha az elemnek nincs megfelelő DOM property-je (pl. ARIA-attribútumok, colspan, SVG). Ökölszabály: alapból property bindinget használj; attribútum bindinget csak ott, ahol nincs property.",
+      "code": "<button [disabled]=\"isBusy\">Küld</button>       <!-- property -->\n<td [attr.colspan]=\"span\">...</td>               <!-- attribútum -->\n<div [attr.aria-label]=\"label\">...</div>",
+      "appFile": null,
+      "tags": [
+        "template",
+        "binding"
+      ]
+    },
+    {
+      "id": 25,
+      "topic": "templates",
+      "level": "junior",
+      "q": "Mik az új control flow blokkok (@if, @for, @switch)?",
+      "a": "Az Angular 17-től bevezetett beépített control flow szintaxis kiváltja a régi *ngIf, *ngFor, *ngSwitch strukturális direktívákat. Az @if/@else if/@else feltételes megjelenítést ad, az @for iterál (kötelező track kifejezéssel a teljesítményért) és van @empty ága, az @switch/@case pedig több eset közötti választást. Gyorsabbak, olvashatóbbak, és nem kell külön importálni a CommonModule-t hozzájuk.",
+      "code": "@if (user) {\n  <p>Üdv, {{ user.name }}</p>\n} @else {\n  <p>Nincs bejelentkezve</p>\n}\n\n@for (task of tasks; track task.id) {\n  <li>{{ task.title }}</li>\n} @empty {\n  <li>Nincs feladat</li>\n}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "template",
+        "control-flow"
+      ]
+    },
+    {
+      "id": 26,
+      "topic": "templates",
+      "level": "medior",
+      "q": "Miért fontos a track (trackBy) az @for-ban?",
+      "a": "Alapból az Angular egy lista újrarenderelésekor nem tudja, melyik régi elem melyik újnak felel meg, ezért sok DOM-elemet feleslegesen újraépíthet. A track egy egyedi azonosítót ad minden elemhez (pl. track task.id), így az Angular pontosan követi, mi változott, és csak a különbséget frissíti. Ez nagy listáknál jelentős teljesítménynyereség, és megőrzi az elemek állapotát (pl. fókusz, input-tartalom). Az @for-ban a track kötelező.",
+      "code": "@for (task of tasks; track task.id) {\n  <app-task-item [task]=\"task\" />\n}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "template",
+        "teljesítmény"
+      ]
+    },
+    {
+      "id": 27,
+      "topic": "templates",
+      "level": "medior",
+      "q": "Mik a template referencia változók (#var)?",
+      "a": "A template referencia változó (#név) egy hivatkozás egy DOM-elemre vagy komponensre a template-en belül. Használhatod más helyen a template-ben, vagy elérheted a komponens osztályból @ViewChild-dal. Tipikus eset: egy input értékének elérése, vagy egy gyerekkomponens metódusának hívása.",
+      "code": "<input #titleInput placeholder=\"Cím\" />\n<button (click)=\"add(titleInput.value)\">Hozzáad</button>",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "template",
+        "referencia"
+      ]
+    },
+    {
+      "id": 28,
+      "topic": "templates",
+      "level": "medior",
+      "q": "Mi az ng-container és mire jó?",
+      "a": "Az <ng-container> egy logikai csoportosító elem, amely NEM jelenik meg a DOM-ban — nincs saját HTML-eleme. Akkor hasznos, ha strukturális direktívát (vagy @if/@for-t) szeretnél alkalmazni több elemre extra wrapper div nélkül, vagy ha nem akarsz felesleges csomópontot a DOM-ban (pl. tábla-sorok, flex/grid elrendezés miatt).",
+      "code": "<ng-container @if=\"loaded\">\n  <h2>Cím</h2>\n  <p>Tartalom</p>\n</ng-container>  <!-- nincs extra div a DOM-ban -->",
+      "appFile": null,
+      "tags": [
+        "template"
+      ]
+    },
+    {
+      "id": 29,
+      "topic": "templates",
+      "level": "senior",
+      "q": "Mi az ng-template és hogyan használható dinamikusan?",
+      "a": "Az <ng-template> egy nem renderelődő template-blokk: a benne lévő tartalom csak akkor jelenik meg, ha explicit módon példányosítod. A strukturális direktívák (*ngIf, @if) a háttérben ng-template-et használnak. Haladó felhasználás: TemplateRef-ként átadhatod, ngTemplateOutlet-tel máshol megjeleníthetd, vagy programozottan (ViewContainerRef) beszúrhatod — ez az alapja a dinamikus, testreszabható komponenseknek (pl. egy tábla, ahol a cellák megjelenítését a hívó adja meg template-ként).",
+      "code": "<ng-template #loading>\n  <p>Betöltés...</p>\n</ng-template>\n\n<div *ngIf=\"data; else loading\">{{ data }}</div>",
+      "appFile": null,
+      "tags": [
+        "template",
+        "haladó"
+      ]
+    },
+    {
+      "id": 30,
+      "topic": "directives",
+      "level": "junior",
+      "q": "Mi a direktíva, és milyen típusai vannak?",
+      "a": "A direktíva egy utasítás az Angular számára, hogyan viselkedjen vagy nézzen ki egy DOM-elem. Három típusa van: (1) komponens direktíva — valójában egy template-tel rendelkező direktíva (a komponens is technikailag direktíva); (2) strukturális direktíva — a DOM szerkezetét módosítja, elemeket ad hozzá vagy vesz el (*ngIf, *ngFor); (3) attribútum direktíva — egy meglévő elem megjelenését vagy viselkedését módosítja (ngClass, ngStyle, vagy egyéni, pl. egy highlight).",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "direktíva",
+        "alap"
+      ]
+    },
+    {
+      "id": 31,
+      "topic": "directives",
+      "level": "junior",
+      "q": "Mi a különbség a strukturális és az attribútum direktíva között?",
+      "a": "A strukturális direktíva a DOM elrendezését változtatja: elemeket ad hozzá, távolít el vagy cserél. Csillag (*) prefixszel jelöljük (*ngIf, *ngFor), ami a háttérben ng-template-té alakul. Az attribútum direktíva egy létező elem tulajdonságait, stílusát vagy viselkedését módosítja anélkül, hogy a DOM-szerkezetet változtatná (ngClass, ngStyle, vagy egyéni [appHighlight]). Egy elemen több attribútum direktíva is lehet, de strukturálisból csak egy.",
+      "code": "<div *ngIf=\"show\">Strukturális</div>\n<div [ngClass]=\"{ active: isActive }\">Attribútum</div>",
+      "appFile": null,
+      "tags": [
+        "direktíva"
+      ]
+    },
+    {
+      "id": 32,
+      "topic": "directives",
+      "level": "medior",
+      "q": "Hogyan írsz egyéni attribútum direktívát?",
+      "a": "Egy @Directive dekorátorral ellátott osztályt hozol létre, selectorral (szögletes zárójelben, pl. [appHighlight]). A DOM eléréséhez ElementRef-et injektálsz, a biztonságos módosításhoz Renderer2-t. Eseményekre @HostListener-rel figyelsz, a host elem property-jét @HostBinding-gal kötöd. Így egy újrahasznosítható viselkedést csomagolsz be, amit bármely elemre rátehetsz.",
+      "code": "@Directive({ selector: '[appHighlight]', standalone: true })\nexport class HighlightDirective {\n  private el = inject(ElementRef);\n  @HostListener('mouseenter') onEnter() {\n    this.el.nativeElement.style.background = '#fff3cd';\n  }\n}",
+      "appFile": "src/app/directives/highlight.directive.ts",
+      "tags": [
+        "direktíva",
+        "egyéni"
+      ]
+    },
+    {
+      "id": 33,
+      "topic": "directives",
+      "level": "medior",
+      "q": "Mi a @HostListener és a @HostBinding?",
+      "a": "Mindkettő az egyéni direktíva (vagy komponens) 'host' elemével dolgozik. A @HostListener eseményfigyelőt köt a host elemre: @HostListener('click') esetén a metódus lefut kattintáskor. A @HostBinding a host elem egy property-jét vagy attribútumát köti a direktíva egy mezőjéhez: @HostBinding('class.active') isActive esetén az elemre az .active osztály kerül, ha isActive igaz. Együtt tiszta, deklaratív módot adnak a DOM-interakcióra.",
+      "code": "@HostBinding('style.cursor') cursor = 'pointer';\n@HostListener('mouseleave') onLeave() { /* ... */ }",
+      "appFile": "src/app/directives/highlight.directive.ts",
+      "tags": [
+        "direktíva"
+      ]
+    },
+    {
+      "id": 34,
+      "topic": "directives",
+      "level": "junior",
+      "q": "Mi az ngClass és az ngStyle?",
+      "a": "Mindkettő beépített attribútum direktíva a dinamikus megjelenéshez. Az ngClass feltételesen ad hozzá vagy vesz el CSS-osztályokat egy objektum, tömb vagy string alapján. Az ngStyle inline stílusokat állít dinamikusan. Egyszerű esetben a [class.név] és [style.tulajdonság] binding is elég, de több feltételnél az ngClass/ngStyle olvashatóbb.",
+      "code": "<div [ngClass]=\"{ done: task.done, urgent: task.priority === 'high' }\"></div>\n<div [ngStyle]=\"{ color: isError ? 'red' : 'green' }\"></div>",
+      "appFile": null,
+      "tags": [
+        "direktíva"
+      ]
+    },
+    {
+      "id": 35,
+      "topic": "directives",
+      "level": "senior",
+      "q": "Mi az ElementRef és a Renderer2 közötti különbség, és melyiket használd?",
+      "a": "Az ElementRef közvetlen hozzáférést ad a natív DOM-elemhez (nativeElement). Ezt közvetlenül manipulálni azonban kockázatos: platformfüggő (nem működik pl. server-side renderingben vagy web workerben), és XSS-sebezhetőséget nyithat. A Renderer2 egy absztrakciós réteg, amely platformfüggetlen, biztonságos DOM-módosítást tesz lehetővé (setStyle, addClass, setAttribute). Senior best practice: kerüld a közvetlen nativeElement-manipulációt, használj Renderer2-t (vagy még inkább data bindinget és direktívákat), hogy az app SSR-kompatibilis és biztonságos maradjon.",
+      "code": "constructor(private el: ElementRef, private r: Renderer2) {}\nhighlight() {\n  this.r.setStyle(this.el.nativeElement, 'background', '#fff3cd');\n}",
+      "appFile": "src/app/directives/highlight.directive.ts",
+      "tags": [
+        "direktíva",
+        "haladó",
+        "ssr"
+      ]
+    },
+    {
+      "id": 36,
+      "topic": "communication",
+      "level": "junior",
+      "q": "Mi az @Input, és hogyan használod?",
+      "a": "Az @Input egy property-dekorátor, amellyel a szülő komponens adatot ad át a gyerekének. A gyerekben @Input()-tal jelölsz egy mezőt, a szülő template-ben pedig property bindinggal töltöd fel: [task]=\"aktualisTask\". Az input értéke az ngOnChanges/ngOnInit idejére áll be. Modern Angularban jelölhető kötelezőnek is: @Input({ required: true }).",
+      "code": "// Gyerek:\n@Input({ required: true }) task!: Task;\n// Szülő:\n<app-task-item [task]=\"selectedTask\" />",
+      "appFile": "src/app/components/task-item.component.ts",
+      "tags": [
+        "kommunikáció",
+        "input"
+      ]
+    },
+    {
+      "id": 37,
+      "topic": "communication",
+      "level": "junior",
+      "q": "Mi az @Output, és hogyan működik?",
+      "a": "Az @Output egy property-dekorátor egy EventEmitter köré, amellyel a gyerek komponens eseményt küld a szülőnek. A gyerek emit()-tel bocsát ki értéket, a szülő pedig event bindinggal figyel rá: (toggle)=\"onToggle($event)\". Így valósul meg a gyerek -> szülő irányú kommunikáció, tisztán, egyirányú adatáramlást megőrizve.",
+      "code": "// Gyerek:\n@Output() toggle = new EventEmitter<number>();\nonClick() { this.toggle.emit(this.task.id); }\n// Szülő:\n<app-task-item (toggle)=\"handleToggle($event)\" />",
+      "appFile": "src/app/components/task-item.component.ts",
+      "tags": [
+        "kommunikáció",
+        "output"
+      ]
+    },
+    {
+      "id": 38,
+      "topic": "communication",
+      "level": "medior",
+      "q": "Hogyan kommunikálnak egymással a nem rokon komponensek?",
+      "a": "Ha két komponens nincs szülő-gyerek viszonyban, az @Input/@Output nem elég. A bevált megoldás egy megosztott service, amely RxJS Subjectet/BehaviorSubjectet vagy egy signalt tart. Az egyik komponens beír az állapotba (next() vagy signal frissítés), a másik feliratkozik/olvassa. Mivel a service singleton (providedIn: 'root'), mindkét komponens ugyanazt a példányt kapja, így egyetlen igazságforráson osztoznak.",
+      "code": "@Injectable({ providedIn: 'root' })\nexport class StateService {\n  private state = new BehaviorSubject<string>('');\n  state$ = this.state.asObservable();\n  set(v: string) { this.state.next(v); }\n}",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "kommunikáció",
+        "service",
+        "rxjs"
+      ]
+    },
+    {
+      "id": 39,
+      "topic": "communication",
+      "level": "medior",
+      "q": "Mi a @ViewChild, és mikor használod?",
+      "a": "A @ViewChild hozzáférést ad a komponens saját template-jében lévő gyerek komponenshez, direktívához vagy DOM-elemhez (template referencia változón át). A referencia az ngAfterViewInit életciklusban válik elérhetővé. Tipikus használat: egy input fókuszálása, egy gyerekkomponens publikus metódusának hívása, vagy egy natív elem méretének olvasása.",
+      "code": "@ViewChild('titleInput') input!: ElementRef<HTMLInputElement>;\nngAfterViewInit() { this.input.nativeElement.focus(); }",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "kommunikáció",
+        "viewchild"
+      ]
+    },
+    {
+      "id": 40,
+      "topic": "communication",
+      "level": "medior",
+      "q": "Mi a különbség a @ViewChild és a @ContentChild között?",
+      "a": "A @ViewChild a komponens SAJÁT template-jében definiált elemekre hivatkozik. A @ContentChild a komponensbe KÍVÜLRŐL, <ng-content>-en át vetített (projected) tartalomra. Röviden: a view a te template-ed, a content az, amit a szülő tett közéd a nyitó és záró tag közé. Ennek megfelelően a @ContentChild az ngAfterContentInit-ben, a @ViewChild az ngAfterViewInit-ben áll be.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "kommunikáció",
+        "viewchild",
+        "contentchild"
+      ]
+    },
+    {
+      "id": 41,
+      "topic": "communication",
+      "level": "medior",
+      "q": "Mi a content projection (ng-content)?",
+      "a": "A content projection lehetővé teszi, hogy a szülő HTML-tartalmat 'injektáljon' a gyerekkomponens template-jébe. A gyerek egy <ng-content></ng-content> helyőrzőt tesz oda, ahová a vetített tartalom kerül. Ez teszi a komponenseket rugalmassá és újrahasznosíthatóvá (pl. egy card komponens, ahová a szülő tetszőleges tartalmat tehet). Több slot is lehet a select attribútummal (pl. <ng-content select=\"[header]\">).",
+      "code": "// Gyerek template:\n<div class=\"card\"><ng-content></ng-content></div>\n// Szülő használat:\n<app-card><p>Bármilyen tartalom</p></app-card>",
+      "appFile": "src/app/components/task-item.component.ts",
+      "tags": [
+        "kommunikáció",
+        "content-projection"
+      ]
+    },
+    {
+      "id": 42,
+      "topic": "communication",
+      "level": "senior",
+      "q": "Milyen mintákat ismersz nagy alkalmazások állapotkezelésére?",
+      "a": "Több szint van a komplexitás szerint. Kicsiben: egy service BehaviorSubjecttel vagy signalokkal, egyetlen igazságforrással — egyszerű és elég. Közepesen: egy state facade minta, ahol a service elrejti az RxJS-logikát a komponensek elől. Nagyban: dedikált state management könyvtár, mint az NgRx (Redux-minta: store, actions, reducers, effects, selectors) vagy a könnyebb NgRx Signal Store / Elf. A senior döntés: a store költsége (boilerplate, tanulási görbe) csak akkor éri meg, ha az állapot valóban komplex — sok forrás, származtatott adat, időutazás-debug igény. Nem vezetünk be Reduxot csak divatból.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "kommunikáció",
+        "state",
+        "architektúra",
+        "haladó"
+      ]
+    },
+    {
+      "id": 43,
+      "topic": "di",
+      "level": "junior",
+      "q": "Mi a service az Angularban?",
+      "a": "A service egy osztály, amely újrafelhasználható logikát vagy állapotot tartalmaz, függetlenül a komponensektől. Tipikus feladatai: adatlekérés API-ból, üzleti logika, megosztott állapot kezelése, naplózás. A @Injectable dekorátorral jelöljük, és dependency injectionön keresztül kapják meg a komponensek. Így a UI (komponens) és a logika (service) szétválik, ami tisztább, tesztelhetőbb kódot ad.",
+      "code": "@Injectable({ providedIn: 'root' })\nexport class TaskService {\n  getTasks(): Task[] { return [...]; }\n}",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "di",
+        "service",
+        "alap"
+      ]
+    },
+    {
+      "id": 44,
+      "topic": "di",
+      "level": "junior",
+      "q": "Mi a Dependency Injection (DI)?",
+      "a": "A Dependency Injection egy tervezési minta, ahol egy osztály nem maga hozza létre a függőségeit, hanem kívülről kapja meg őket. Angularban a keretrendszer beépített injectora gondoskodik erről: ha egy komponens kér egy TaskService-t (a constructorban vagy inject()-tel), az Angular megkeresi vagy létrehozza a példányt, és átadja. Ez lazább csatolást, könnyebb tesztelést (mock-olható függőségek) és jobb újrahasznosíthatóságot eredményez.",
+      "code": "// A keretrendszer injektálja:\nconstructor(private tasks: TaskService) {}\n// vagy:\nprivate tasks = inject(TaskService);",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "di",
+        "alap"
+      ]
+    },
+    {
+      "id": 45,
+      "topic": "di",
+      "level": "medior",
+      "q": "Mit jelent a providedIn: 'root'?",
+      "a": "A @Injectable({ providedIn: 'root' }) azt jelenti, hogy a service az alkalmazás gyökér-injectorában regisztrálódik, így az egész appban egyetlen, közös (singleton) példány létezik belőle. Emellett tree-shakeable: ha sehol nem használják, a build kihagyja a bundle-ből. Ez a modern, ajánlott mód service-ek regisztrálására — nem kell külön a providers tömbbe felvenni.",
+      "code": "@Injectable({ providedIn: 'root' })  // app-szintű singleton",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "di",
+        "provider"
+      ]
+    },
+    {
+      "id": 46,
+      "topic": "di",
+      "level": "medior",
+      "q": "Mik a provider scope-ok, és mikor kapsz új példányt?",
+      "a": "A provider regisztrálásának helye dönti el a példány élettartamát és megosztottságát. Root szinten (providedIn: 'root') egyetlen app-szintű singleton van. Ha egy komponens providers tömbjében adod meg, akkor az adott komponens (és gyerekei) minden példányához ÚJ service-példány jön létre — ez hasznos, ha komponensenként elszigetelt állapot kell. Route-szinten is megadható. Az injector-hierarchia határozza meg, melyik példányt kapod.",
+      "code": "@Component({\n  providers: [TaskService], // ÚJ példány e komponensfánként\n})",
+      "appFile": null,
+      "tags": [
+        "di",
+        "provider",
+        "scope"
+      ]
+    },
+    {
+      "id": 47,
+      "topic": "di",
+      "level": "medior",
+      "q": "Mi az inject() függvény, és mikor hasznos?",
+      "a": "Az inject() (Angular 14+) egy alternatíva a constructor-injekcióhoz: bárhol, ahol injektálási kontextus van (mezőinicializáló, funkcionális guard, interceptor, resolver), lekérhetsz egy függőséget. Előnyei: tisztább meződeklarációk, öröklésnél nem kell a constructort végigpasszolni, és funkcionális API-kban (ahol nincs osztály) is működik. A funkcionális guardok és interceptorok teljesen erre épülnek.",
+      "code": "export class UserService {\n  private http = inject(HttpClient); // constructor nélkül\n}",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "di",
+        "inject"
+      ]
+    },
+    {
+      "id": 48,
+      "topic": "di",
+      "level": "senior",
+      "q": "Mi az injector-hierarchia, és hogyan oldódik fel egy függőség?",
+      "a": "Az Angular injectorai fát alkotnak, párhuzamosan a komponensfával (plusz a modul- és környezet-injectorok). Amikor egy komponens kér egy függőséget, az Angular a saját injectorától indulva felfelé keresi: ha ott megvan a provider, azt a példányt adja; ha nem, feljebb lép a szülő injectorhoz, egészen a root injectorig. Az első találat nyer. Ez teszi lehetővé, hogy egy service komponensenként felülírható legyen, vagy hogy app-szintű singleton legyen. A @Optional, @Self, @SkipSelf, @Host dekorátorokkal finomhangolható a feloldás.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "di",
+        "haladó",
+        "injector"
+      ]
+    },
+    {
+      "id": 49,
+      "topic": "di",
+      "level": "senior",
+      "q": "Mik az injection tokenek, és mikor kellenek?",
+      "a": "Osztályokat könnyen injektálhatsz a típusuk alapján, de nem-osztály értékeket (konfigurációs objektum, string, függvény, interfész) nem, mert azoknak nincs futásidejű típusuk. Ilyenkor egy InjectionToken-t hozol létre egyedi azonosítóként, és azon keresztül regisztrálod/injektálod az értéket. Tipikus eset: egy API-alap-URL, egy feature-flag konfiguráció, vagy egy third-party könyvtár beállítása. Ez típusbiztos és tesztelhető módot ad a konfigurációk beszúrására.",
+      "code": "export const API_URL = new InjectionToken<string>('api.url');\n// provider:\n{ provide: API_URL, useValue: 'https://api.example.com' }\n// használat:\nprivate url = inject(API_URL);",
+      "appFile": null,
+      "tags": [
+        "di",
+        "haladó",
+        "token"
+      ]
+    },
+    {
+      "id": 50,
+      "topic": "modules",
+      "level": "junior",
+      "q": "Mi az NgModule?",
+      "a": "Az NgModule egy konténer, amely összefog kapcsolódó komponenseket, direktívákat, pipe-okat és service-eket. Fő mezői: declarations (a modulhoz tartozó komponensek/direktívák/pipe-ok), imports (más modulok behozatala), exports (mit tesz elérhetővé másoknak), providers (service-ek), és a root modulnál bootstrap (az induló komponens). A modern Angularban a standalone komponensek egyre inkább kiváltják, de sok meglévő projekt még NgModule-alapú.",
+      "code": "@NgModule({\n  declarations: [AppComponent],\n  imports: [BrowserModule],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}",
+      "appFile": null,
+      "tags": [
+        "modul",
+        "alap"
+      ]
+    },
+    {
+      "id": 51,
+      "topic": "modules",
+      "level": "medior",
+      "q": "Mik a standalone komponensek, és miért jobbak?",
+      "a": "A standalone komponens (Angular 14+, v17-től alapértelmezett) nem tartozik NgModule-hoz: a standalone: true jelöléssel közvetlenül az imports tömbjében sorolja fel a szükséges függőségeit (más komponensek, direktívák, pipe-ok, modulok). Előnyök: kevesebb boilerplate, egyszerűbb mentális modell, könnyebb lazy loading (loadComponent), és tisztább függőségi kép — minden komponens maga mondja meg, mire van szüksége. Az új projektek standalone-first szemlélettel indulnak.",
+      "code": "@Component({\n  selector: 'app-tasks',\n  standalone: true,\n  imports: [CommonModule, TaskItemComponent],\n  template: `...`,\n})\nexport class TasksComponent {}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "modul",
+        "standalone"
+      ]
+    },
+    {
+      "id": 52,
+      "topic": "modules",
+      "level": "medior",
+      "q": "Mi a bootstrapping, és hogyan indul egy standalone app?",
+      "a": "A bootstrapping az alkalmazás elindításának folyamata: az Angular betölti a gyökér-komponenst a DOM-ba. NgModule-alapú appban ezt a platformBrowserDynamic().bootstrapModule(AppModule) végzi. Standalone appban a main.ts-ben a bootstrapApplication(AppComponent, { providers: [...] }) hívás indít, ahol a providers-be kerülnek az app-szintű szolgáltatások (provideRouter, provideHttpClient stb.). Nincs szükség AppModule-ra.",
+      "code": "bootstrapApplication(AppComponent, {\n  providers: [provideRouter(routes), provideHttpClient()],\n});",
+      "appFile": "src/main.ts",
+      "tags": [
+        "modul",
+        "standalone",
+        "bootstrap"
+      ]
+    },
+    {
+      "id": 53,
+      "topic": "modules",
+      "level": "senior",
+      "q": "Hogyan migrálnál egy NgModule-alapú appot standalone-ra?",
+      "a": "Fokozatosan, nem egy lépésben. Az Angular ad egy sémát: ng generate @angular/core:standalone, amely több menetben (standalone jelölés, bootstrap átírása, felesleges NgModule-ok eltávolítása) automatizálja a nagyját. Kézzel: először a levél-komponenseket teszed standalone-ná, importokat a komponensbe mozgatod, majd a routingot loadComponent-re állítod, végül a root bootstrapet cseréled bootstrapApplication-re. A CommonModule/RouterModule helyett a szükséges direktívákat/pipe-okat importálod. A kulcs a lépésenkénti, tesztelt átállás.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "modul",
+        "standalone",
+        "migráció",
+        "haladó"
+      ]
+    },
+    {
+      "id": 54,
+      "topic": "routing",
+      "level": "junior",
+      "q": "Mi az Angular Router, és mire való?",
+      "a": "Az Angular Router a kliensoldali navigációért felel: URL alapján megjeleníti a megfelelő komponenst, teljes oldalújratöltés nélkül. Egy útvonal-konfigurációt (Routes tömb) adsz meg, amely path -> komponens párokat tartalmaz. A router figyeli az URL-t, és a <router-outlet> helyre rendereli a találatot. Támogat paramétereket, gyerek-útvonalakat, lazy loadingot, guardokat és resolverket.",
+      "code": "export const routes: Routes = [\n  { path: 'tasks', component: TasksComponent },\n  { path: 'users', component: UsersComponent },\n];",
+      "appFile": "src/app/app.routes.ts",
+      "tags": [
+        "routing",
+        "alap"
+      ]
+    },
+    {
+      "id": 55,
+      "topic": "routing",
+      "level": "junior",
+      "q": "Mi a routerLink és a router-outlet?",
+      "a": "A routerLink egy direktíva a deklaratív navigációhoz a template-ben: <a routerLink=\"/tasks\">, amely az adott útvonalra navigál kattintáskor (oldalújratöltés nélkül, ellentétben a sima href-fel). A <router-outlet> egy helyőrző, ahová a router az aktuális útvonalhoz tartozó komponenst rendereli. A routerLinkActive-val jelölhető az aktív link stílusa.",
+      "code": "<nav>\n  <a routerLink=\"/tasks\" routerLinkActive=\"active\">Feladatok</a>\n</nav>\n<router-outlet></router-outlet>",
+      "appFile": "src/app/app.component.ts",
+      "tags": [
+        "routing",
+        "alap"
+      ]
+    },
+    {
+      "id": 56,
+      "topic": "routing",
+      "level": "medior",
+      "q": "Hogyan olvasol útvonal-paramétert (route param)?",
+      "a": "Az ActivatedRoute service-t injektálod, és a paramMap Observable-jére iratkozol fel (vagy a snapshot-ot olvasod egyszeri esetben). Az Observable-változat akkor kell, ha ugyanaz a komponens marad, csak a paraméter változik (pl. /user/1 -> /user/2). A route-ban :id szintaxissal definiálod a paramétert.",
+      "code": "// route: { path: 'user/:id', component: UserComponent }\nprivate route = inject(ActivatedRoute);\nngOnInit() {\n  this.route.paramMap.subscribe(p => this.id = p.get('id'));\n}",
+      "appFile": null,
+      "tags": [
+        "routing",
+        "paraméter"
+      ]
+    },
+    {
+      "id": 57,
+      "topic": "routing",
+      "level": "medior",
+      "q": "Mi a route guard, és milyen fajtái vannak?",
+      "a": "A route guard olyan logika, amely eldönti, engedélyezett-e egy navigáció. Fajtái: CanActivate (beléphet-e az útvonalra), CanActivateChild (gyerek-útvonalakra), CanDeactivate (elhagyhatja-e — pl. nem mentett űrlap figyelmeztetés), CanMatch/CanLoad (betölthető-e a lazy modul), és a Resolve (adat előtöltése). Modern Angularban ezek funkcionális formában (sima függvényként, inject()-tel) írhatók, ami tömörebb, mint a régi osztály-alapú guardok.",
+      "code": "export const authGuard: CanActivateFn = () => {\n  const auth = inject(AuthService);\n  return auth.isLoggedIn() ? true : inject(Router).parseUrl('/login');\n};",
+      "appFile": "src/app/guards/auth.guard.ts",
+      "tags": [
+        "routing",
+        "guard"
+      ]
+    },
+    {
+      "id": 58,
+      "topic": "routing",
+      "level": "medior",
+      "q": "Mi a lazy loading a routingban, és hogyan valósítod meg?",
+      "a": "A lazy loading azt jelenti, hogy egy útvonal kódja csak akkor töltődik le, amikor a felhasználó odanavigál — nem az induló bundle része. Standalone komponensnél loadComponent-tel, egy funkció-terület útvonalcsoportjánál loadChildren-nel valósítod meg, dinamikus import()-tal. Ez csökkenti a kezdeti bundle méretét és gyorsítja az első betöltést. Nagy alkalmazásban ez az egyik legfontosabb teljesítmény-optimalizálás.",
+      "code": "{\n  path: 'users',\n  loadComponent: () =>\n    import('./components/users.component').then(m => m.UsersComponent),\n}",
+      "appFile": "src/app/app.routes.ts",
+      "tags": [
+        "routing",
+        "lazy-loading",
+        "teljesítmény"
+      ]
+    },
+    {
+      "id": 59,
+      "topic": "routing",
+      "level": "junior",
+      "q": "Mi a wildcard route és a redirect?",
+      "a": "A wildcard route (path: '**') minden olyan URL-re illeszkedik, amelyre nincs korábbi találat — jellemzően 404-oldalt vagy átirányítást ad. A redirect (redirectTo) egy útvonalat egy másikra irányít; a pathMatch: 'full' azt jelenti, hogy csak a teljes URL egyezésekor irányít át (fontos az üres path '' esetén). A route-ok sorrendje számít: az Angular felülről lefelé keresi az első találatot.",
+      "code": "{ path: '', redirectTo: 'tasks', pathMatch: 'full' },\n{ path: '**', component: NotFoundComponent },",
+      "appFile": "src/app/app.routes.ts",
+      "tags": [
+        "routing"
+      ]
+    },
+    {
+      "id": 60,
+      "topic": "routing",
+      "level": "senior",
+      "q": "Mi a resolver, és mikor használnád guard helyett?",
+      "a": "A resolver (Resolve) adatot tölt be MÉG az útvonal aktiválása előtt, így a komponens már a kész adattal jelenik meg — nincs villódzó 'betöltés' állapot a navigáció után. A guard ezzel szemben engedélyez vagy tilt egy navigációt. Resolvert akkor érdemes használni, ha a nézetnek feltétlenül szüksége van az adatra a megjelenéshez, és jobb a navigációt megvárni, mint üres képernyőt mutatni. Óvatosan: a resolver késlelteti a navigációt, ezért gyors adatforráshoz való; lassú kéréseknél gyakran jobb a komponensben tölteni és skeleton UI-t mutatni.",
+      "code": "export const userResolver: ResolveFn<User> = (route) =>\n  inject(UserService).getUser(route.paramMap.get('id')!);",
+      "appFile": null,
+      "tags": [
+        "routing",
+        "resolver",
+        "haladó"
+      ]
+    },
+    {
+      "id": 61,
+      "topic": "rxjs",
+      "level": "junior",
+      "q": "Mi az Observable?",
+      "a": "Az Observable egy aszinkron adatfolyam: idővel nulla, egy vagy több értéket bocsáthat ki, majd befejeződhet vagy hibázhat. Csak akkor 'aktiválódik', ha valaki feliratkozik rá (subscribe) — addig lazy. Angularban sok minden Observable-t ad vissza: a HttpClient, a router eseményei, a reactive forms értékváltozásai. Az RxJS operátoraival (map, filter, stb.) transzformálható és kombinálható a folyam.",
+      "code": "tasks$: Observable<Task[]> = this.taskService.getTasks();\n// fogyasztás:\nthis.tasks$.subscribe(tasks => console.log(tasks));",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "rxjs",
+        "observable",
+        "alap"
+      ]
+    },
+    {
+      "id": 62,
+      "topic": "rxjs",
+      "level": "junior",
+      "q": "Mi a különbség az Observable és a Promise között?",
+      "a": "A Promise egyetlen jövőbeli értéket képvisel, azonnal (eager) elindul a létrehozásakor, és nem törölhető. Az Observable idővel több értéket bocsáthat ki, lazy (csak subscribe-ra indul), törölhető (unsubscribe), és gazdag operátor-készlettel transzformálható. HTTP-hez a Promise is elég lenne, de az Observable rugalmasabb: pl. újrapróbálkozás (retry), időzítés (debounceTime), megszakítás (switchMap) tisztán megoldható vele.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "observable"
+      ]
+    },
+    {
+      "id": 63,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Mik a leggyakoribb RxJS operátorok, és mit csinálnak?",
+      "a": "map (érték transzformálása), filter (szűrés feltétel alapján), tap (mellékhatás, pl. logolás, a folyam módosítása nélkül), switchMap (belső observable-re vált, az előzőt megszakítja — kereséshez ideális), mergeMap (párhuzamosan futtat több belső observable-t), debounceTime (vár, mielőtt kibocsát — gépelés-szűrésre), distinctUntilChanged (csak változáskor enged tovább), catchError (hibakezelés), take/takeUntil (korlátozás/leállítás). Ezeket a pipe()-ban láncolod.",
+      "code": "search$.pipe(\n  debounceTime(300),\n  distinctUntilChanged(),\n  switchMap(term => this.api.search(term))\n)",
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "operátor"
+      ]
+    },
+    {
+      "id": 64,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Mi a különbség a switchMap, mergeMap, concatMap és exhaustMap között?",
+      "a": "Mind a négy belső observable-t hoz létre minden bejövő értékre, de máshogy kezelik az átfedést. switchMap: új értéknél megszakítja az előző belső folyamot (jó keresésnél — csak a legutóbbi számít). mergeMap: minden belső folyamot párhuzamosan futtat (jó független műveletekhez). concatMap: sorban, egyesével dolgozza fel őket (megőrzi a sorrendet). exhaustMap: amíg az aktuális belső folyam fut, eldobja az újakat (jó dupla-klikk elleni védelemre, pl. mentés gomb). A választás a use-case-től függ.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "operátor",
+        "haladó"
+      ]
+    },
+    {
+      "id": 65,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Mi a Subject, és miben más, mint az Observable?",
+      "a": "A sima Observable 'unicast': minden feliratkozó saját, független végrehajtást kap. A Subject 'multicast' — egyszerre Observable ÉS Observer: több feliratkozónak ugyanazt az értéket sugározza, és kívülről is beletolhatsz értéket (next()). Ezért gyakran használják eseménybusznak vagy megosztott állapotnak. Fajtái: Subject (nincs kezdőérték), BehaviorSubject (van kezdőérték, az utolsót adja új feliratkozóknak), ReplaySubject (több korábbi értéket visszajátszik), AsyncSubject (csak a befejezéskori utolsó értéket).",
+      "code": "const s = new Subject<number>();\ns.subscribe(v => console.log('A', v));\ns.next(1); // minden feliratkozó megkapja",
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "subject"
+      ]
+    },
+    {
+      "id": 66,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Mi a BehaviorSubject, és miért olyan gyakori Angularban?",
+      "a": "A BehaviorSubject egy Subject kezdőértékkel, amely mindig megőrzi az 'aktuális' értéket, és azt azonnal átadja minden új feliratkozónak. Ez tökéletes megosztott állapot tárolására egy service-ben: bármely komponens, amely később iratkozik fel, rögtön megkapja a legfrissebb állapotot (nem kell megvárnia a következő változást). A .value property-vel szinkron módon is kiolvasható az aktuális érték.",
+      "code": "private tasks = new BehaviorSubject<Task[]>([]);\ntasks$ = this.tasks.asObservable();\naddTask(t: Task) { this.tasks.next([...this.tasks.value, t]); }",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "rxjs",
+        "subject",
+        "state"
+      ]
+    },
+    {
+      "id": 67,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Miért és hogyan iratkozol le egy Observable-ről?",
+      "a": "A manuális feliratkozás (subscribe) élő marad, amíg le nem iratkozol — ha a komponens megsemmisül, de a feliratkozás nem, memory leak keletkezik, és a callback feleslegesen (vagy hibásan) tovább futhat. Megoldások: (1) async pipe a template-ben — automatikusan le- és feliratkozik, ez a legtisztább; (2) takeUntilDestroyed() operátor (Angular 16+); (3) egy Subscription gyűjtő, amit ngOnDestroy-ban unsubscribe-olsz. A HttpClient egyszeri kéréseinél a folyam magától befejeződik, de az élő folyamoknál (pl. valueChanges) muszáj leiratkozni.",
+      "code": "// Legtisztább: async pipe\n@for (t of (tasks$ | async); track t.id) { ... }\n// Vagy:\nsource$.pipe(takeUntilDestroyed()).subscribe(...)",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "rxjs",
+        "memory-leak"
+      ]
+    },
+    {
+      "id": 68,
+      "topic": "rxjs",
+      "level": "senior",
+      "q": "Hogyan kombinálnál több adatforrást (pl. combineLatest, forkJoin)?",
+      "a": "combineLatest: több folyam legfrissebb értékeit kombinálja, és minden változáskor újraszámol — jó élő, egymástól függő adatokhoz (pl. szűrő + lista). forkJoin: megvárja, míg minden bemeneti observable befejeződik, és az utolsó értékeiket adja egyben — olyan, mint a Promise.all, jó párhuzamos, egyszeri HTTP-kérésekhez. zip: párokba rendezi az értékeket sorrendben. withLatestFrom: egy fő folyamhoz csatolja egy másik legutóbbi értékét, de csak a fő folyam ütemez. A választás attól függ, élő vagy befejeződő folyamokról van-e szó.",
+      "code": "forkJoin({\n  user: this.api.getUser(id),\n  posts: this.api.getPosts(id),\n}).subscribe(({ user, posts }) => { /* mindkettő kész */ });",
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "kombináció",
+        "haladó"
+      ]
+    },
+    {
+      "id": 69,
+      "topic": "http",
+      "level": "junior",
+      "q": "Mi a HttpClient, és hogyan küldesz vele kérést?",
+      "a": "A HttpClient az Angular beépített szolgáltatása HTTP-kérésekhez (GET, POST, PUT, DELETE, PATCH). Observable-t ad vissza, amelyre feliratkozol az eredményért (vagy async pipe-pal fogyasztod). Generikus típussal megadhatod a válasz alakját (get<User[]>). Modern appban a provideHttpClient()-tel kapcsolod be a main.ts-ben.",
+      "code": "private http = inject(HttpClient);\ngetUsers(): Observable<User[]> {\n  return this.http.get<User[]>('/api/users');\n}",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "http",
+        "alap"
+      ]
+    },
+    {
+      "id": 70,
+      "topic": "http",
+      "level": "medior",
+      "q": "Hogyan kezelsz HTTP-hibát?",
+      "a": "A hívás pipe()-jában a catchError operátorral kapod el a hibát. Ott dönthetsz: visszaadsz egy alapértelmezett értéket (of([])), naplózol, felhasználóbarát üzenetet mutatsz, vagy továbbdobod a hibát (throwError). Emellett a retry/retryWhen operátorral automatikusan újrapróbálkozhatsz átmeneti hibáknál. Globális, alkalmazásszintű hibakezeléshez egy HTTP interceptor a legjobb hely.",
+      "code": "this.http.get<User[]>(url).pipe(\n  catchError(err => {\n    console.error(err);\n    return of([]); // fallback\n  })\n);",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "http",
+        "hibakezelés"
+      ]
+    },
+    {
+      "id": 71,
+      "topic": "http",
+      "level": "medior",
+      "q": "Mi a HTTP interceptor, és mire használható?",
+      "a": "Az interceptor egy köztes réteg, amely minden kimenő kérést és bejövő választ elkaphat és módosíthat, központilag. Tipikus feladatai: auth token hozzáadása minden kéréshez, globális hibakezelés, loading-indikátor vezérlése, kérés/válasz naplózása, caching. Modern Angularban funkcionális interceptort írsz (HttpInterceptorFn), és a provideHttpClient(withInterceptors([...]))-ben regisztrálod. A kérés immutable, ezért klónozni kell a módosításhoz.",
+      "code": "export const authInterceptor: HttpInterceptorFn = (req, next) => {\n  const cloned = req.clone({\n    setHeaders: { Authorization: `Bearer ${getToken()}` },\n  });\n  return next(cloned);\n};",
+      "appFile": "src/app/services/auth.interceptor.ts",
+      "tags": [
+        "http",
+        "interceptor"
+      ]
+    },
+    {
+      "id": 72,
+      "topic": "http",
+      "level": "senior",
+      "q": "Hogyan valósítanál meg HTTP-cache-t vagy request deduplikációt?",
+      "a": "Interceptorral vagy egy service-réteggel. Cache: az interceptorban GET-kéréseknél kulcsold az URL-t, tárold a választ (pl. egy Map<url, Observable>), és a következő azonos kérésnél add vissza a tárolt folyamot. A shareReplay(1) operátor kulcsfontosságú: egyszer futtatja a kérést, és minden feliratkozónak ugyanazt az eredményt osztja meg, elkerülve a duplikált hálózati hívásokat. Invalidálásra időalapú lejáratot vagy manuális törlést teszel be. Fontos a helyes scope: túl agresszív cache elavult adatot mutathat.",
+      "code": "getConfig() {\n  if (!this.cache$) {\n    this.cache$ = this.http.get('/api/config').pipe(shareReplay(1));\n  }\n  return this.cache$;\n}",
+      "appFile": null,
+      "tags": [
+        "http",
+        "cache",
+        "haladó"
+      ]
+    },
+    {
+      "id": 73,
+      "topic": "forms",
+      "level": "junior",
+      "q": "Milyen űrlaptípusok vannak Angularban?",
+      "a": "Kétféle megközelítés van: (1) Template-driven forms — az űrlap logikája a template-ben él, ngModellel és direktívákkal, kevés osztálykóddal; egyszerű űrlapokhoz gyors. (2) Reactive forms — az űrlap modellje a komponens osztályában él (FormControl, FormGroup), explicit és programozott; komplex, dinamikus vagy erősen validált űrlapokhoz jobb. A két megközelítés külön modult importál (FormsModule vs ReactiveFormsModule).",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "forms",
+        "alap"
+      ]
+    },
+    {
+      "id": 74,
+      "topic": "forms",
+      "level": "medior",
+      "q": "Template-driven vagy reactive form — mikor melyiket?",
+      "a": "Template-driven: kevés mezős, egyszerű űrlapok, ahol a kétirányú kötés (ngModel) elég, és nem kell sok programozott vezérlés — pl. egy bejelentkezési vagy keresőmező. Reactive: komplex űrlapok, dinamikusan hozzáadható mezők, összetett vagy keresztmező-validáció, és amikor jól tesztelhető, explicit modellre van szükség. A reactive skálázódik jobban nagy alkalmazásban; sok csapat alapból ezt választja a kiszámíthatóságáért.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "forms"
+      ]
+    },
+    {
+      "id": 75,
+      "topic": "forms",
+      "level": "medior",
+      "q": "Mi a FormControl, FormGroup és FormArray?",
+      "a": "Ezek a reactive forms építőelemei. FormControl: egyetlen űrlapmező (érték + validációs állapot). FormGroup: mezők (kontrollok) elnevezett csoportja, amely egy objektumként kezelhető (pl. egy cím-alűrlap). FormArray: kontrollok/csoportok dinamikus listája, amelyhez futásidőben adhatsz vagy törölhetsz elemeket (pl. tetszőleges számú telefonszám). A FormBuilder rövidebb szintaxist ad ezek létrehozására.",
+      "code": "form = this.fb.group({\n  name: ['', Validators.required],\n  emails: this.fb.array([]),\n});",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "forms",
+        "reactive"
+      ]
+    },
+    {
+      "id": 76,
+      "topic": "forms",
+      "level": "medior",
+      "q": "Hogyan validálsz reactive formot?",
+      "a": "A FormControl-hoz validátorokat rendelsz: beépítetteket (Validators.required, minLength, email, pattern) vagy egyénieket (egy függvény, amely null-t ad, ha érvényes, vagy egy hibaobjektumot, ha nem). A kontroll állapotát (valid, invalid, touched, dirty, errors) a template-ben lekérdezed a hibaüzenetek megjelenítéséhez. Aszinkron validátor (pl. szerveroldali egyediség-ellenőrzés) is megadható külön paraméterként.",
+      "code": "title = new FormControl('', [Validators.required, Validators.minLength(3)]);\n// template:\n@if (title.invalid && title.touched) { <span>Kötelező, min. 3 karakter</span> }",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "forms",
+        "validáció"
+      ]
+    },
+    {
+      "id": 77,
+      "topic": "forms",
+      "level": "senior",
+      "q": "Hogyan írnál egyéni és keresztmező- (cross-field) validátort?",
+      "a": "Egyéni validátor egy függvény: (control: AbstractControl) => ValidationErrors | null. Egyetlen mezőre a FormControl-ra teszed. Keresztmező-validációhoz (pl. jelszó és megerősítés egyezése) a validátort a FormGroup-ra teszed, mert onnan férsz hozzá több kontrollhoz. Aszinkron esetben AsyncValidatorFn-t adsz, amely Observable/Promise-t ad vissza (pl. szerveroldali egyediség). A jó validátor tiszta, újrahasznosítható, és beszédes hibakulcsot ad.",
+      "code": "const passwordsMatch: ValidatorFn = (g) => {\n  const p = g.get('pass')?.value, c = g.get('confirm')?.value;\n  return p === c ? null : { mismatch: true };\n};",
+      "appFile": null,
+      "tags": [
+        "forms",
+        "validáció",
+        "haladó"
+      ]
+    },
+    {
+      "id": 78,
+      "topic": "pipes",
+      "level": "junior",
+      "q": "Mi a pipe, és hogyan használod?",
+      "a": "A pipe egy megjelenítési transzformáció a template-ben: egy értéket alakít át kiírás előtt, az adat módosítása nélkül. A | szintaxissal használod, és láncolhatod. Beépített példák: date, uppercase, currency, number, json, async. Paramétereket kettősponttal adsz át (pl. date:'yyyy-MM-dd').",
+      "code": "<p>{{ birthday | date:'yyyy.MM.dd' }}</p>\n<p>{{ price | currency:'HUF' }}</p>\n<p>{{ name | uppercase }}</p>",
+      "appFile": "src/app/pipes/capitalize.pipe.ts",
+      "tags": [
+        "pipe",
+        "alap"
+      ]
+    },
+    {
+      "id": 79,
+      "topic": "pipes",
+      "level": "junior",
+      "q": "Mi az async pipe, és miért hasznos?",
+      "a": "Az async pipe egy Observable-t vagy Promise-t fogad, feliratkozik rá, és a legutóbbi értékét jeleníti meg. A legnagyobb előnye: automatikusan LE is iratkozik, amikor a komponens megsemmisül — így nincs memory leak, és nem kell kézzel kezelni a subscription életciklusát. Ez teszi az adatáramlást a template-ben tisztává és biztonságossá.",
+      "code": "@for (task of (tasks$ | async); track task.id) {\n  <app-task-item [task]=\"task\" />\n}",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "pipe",
+        "async",
+        "rxjs"
+      ]
+    },
+    {
+      "id": 80,
+      "topic": "pipes",
+      "level": "medior",
+      "q": "Mi a különbség a pure és impure pipe között?",
+      "a": "A pure pipe (alapértelmezett) csak akkor fut újra, ha a bemenetének REFERENCIÁJA megváltozik — ez gyors, mert az Angular kihagyja, ha nem változott az input. Az impure pipe (pure: false) MINDEN change detection ciklusban lefut, függetlenül attól, változott-e a referencia — ez drága, ezért óvatosan használandó. Impure pipe kell pl. akkor, ha egy tömb belső változásaira (mutáció) is reagálni kell. Az async pipe technikailag impure, de belül optimalizált.",
+      "code": "@Pipe({ name: 'filter', pure: false }) // minden ciklusban fut",
+      "appFile": null,
+      "tags": [
+        "pipe",
+        "teljesítmény"
+      ]
+    },
+    {
+      "id": 81,
+      "topic": "pipes",
+      "level": "medior",
+      "q": "Hogyan írsz egyéni pipe-ot?",
+      "a": "Létrehozol egy osztályt @Pipe dekorátorral (name mezővel), és implementálod a PipeTransform interfészt a transform() metódussal. A transform első paramétere a bemeneti érték, a többi opcionális argumentum. A visszatérési érték a megjelenítendő eredmény. Standalone pipe-ként közvetlenül importálható a komponensbe.",
+      "code": "@Pipe({ name: 'capitalize', standalone: true })\nexport class CapitalizePipe implements PipeTransform {\n  transform(value: string): string {\n    return value ? value[0].toUpperCase() + value.slice(1) : '';\n  }\n}",
+      "appFile": "src/app/pipes/capitalize.pipe.ts",
+      "tags": [
+        "pipe",
+        "egyéni"
+      ]
+    },
+    {
+      "id": 82,
+      "topic": "pipes",
+      "level": "senior",
+      "q": "Miért lehet teljesítményprobléma a pipe-ok és a template-metódusok között, és mi a jó megoldás?",
+      "a": "Ha a template-ben metódust hívsz ({{ compute(x) }}), az MINDEN change detection ciklusban újra lefut, mert az Angular nem tudja, változott-e az eredmény — nagy fáknál ez sok felesleges számítás. Egy pure pipe ezzel szemben memoizál: csak a bemenet referencia-változásakor számol újra. Ezért a származtatott, kiszámított értékekhez pure pipe (vagy modern Angularban computed signal) a jó megoldás, nem template-metódus. Ez jelentős, mérhető különbség lehet listás, gyakran frissülő nézeteknél.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "pipe",
+        "teljesítmény",
+        "haladó"
+      ]
+    },
+    {
+      "id": 83,
+      "topic": "change",
+      "level": "junior",
+      "q": "Mi a change detection?",
+      "a": "A change detection az a mechanizmus, amellyel az Angular szinkronban tartja a nézetet (DOM) az alkalmazás állapotával (komponens-adatok). Amikor valami megváltozik, az Angular végigmegy a komponensfán, összeveti az aktuális és a korábbi értékeket, és frissíti a DOM azon részeit, amelyek eltérnek. A cél, hogy a felhasználó mindig a friss adatot lássa, anélkül, hogy a fejlesztőnek kézzel kellene a DOM-ot módosítania.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "change-detection",
+        "alap"
+      ]
+    },
+    {
+      "id": 84,
+      "topic": "change",
+      "level": "medior",
+      "q": "Mi a Zone.js szerepe a change detectionben?",
+      "a": "A Zone.js egy könyvtár, amely 'monkey-patcheli' a böngésző aszinkron API-jait (eseménykezelők, setTimeout, XHR/fetch, Promise). Így az Angular értesül, amikor egy aszinkron művelet befejeződik, és automatikusan elindítja a change detectiont — a fejlesztőnek nem kell kézzel jeleznie a változást. Ez a kényelem ára némi overhead. Az Angular iránya a 'zoneless' működés, ahol a Signals váltja ki a Zone.js-t, célzottabb és hatékonyabb frissítéssel.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "change-detection",
+        "zone"
+      ]
+    },
+    {
+      "id": 85,
+      "topic": "change",
+      "level": "medior",
+      "q": "Mik a change detection stratégiák (Default vs OnPush)?",
+      "a": "Default: az Angular minden ciklusban ellenőrzi az egész komponensfát (illetve az adott ágat), ami biztonságos, de nagy fánál sok felesleges munka. OnPush: a komponens csak akkor kerül ellenőrzésre, ha (1) egy @Input referenciája megváltozik, (2) esemény történik a komponensben, (3) egy async pipe új értéket ad, vagy (4) manuálisan jelzed (markForCheck). Ez drasztikusan csökkenti az ellenőrzések számát, cserébe immutable adatkezelést igényel.",
+      "code": "@Component({\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})",
+      "appFile": "src/app/components/task-item.component.ts",
+      "tags": [
+        "change-detection",
+        "onpush"
+      ]
+    },
+    {
+      "id": 86,
+      "topic": "change",
+      "level": "senior",
+      "q": "Mik az OnPush buktatói, és hogyan kezeled őket?",
+      "a": "A fő buktató a mutáció: ha egy objektumot vagy tömböt a helyén módosítasz (pl. array.push, obj.prop = x) referencia-csere nélkül, az OnPush komponens NEM frissül, mert a referencia ugyanaz maradt. Megoldás: immutable frissítés (új tömb/objektum: [...arr, x], { ...obj, prop: x }). Másik buktató, ha egy változás kívülről (pl. setTimeout callback) érkezik, ami nem trigger — ilyenkor ChangeDetectorRef.markForCheck() kézzel jelez. A Signals ezt elegánsan megoldja, mert pontosan tudja, mi függ tőle.",
+      "code": "// ROSSZ OnPush mellett:\nthis.tasks.push(newTask);\n// JÓ (új referencia):\nthis.tasks = [...this.tasks, newTask];",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "change-detection",
+        "onpush",
+        "haladó"
+      ]
+    },
+    {
+      "id": 87,
+      "topic": "change",
+      "level": "senior",
+      "q": "Mi a ChangeDetectorRef, és mikor használod (markForCheck, detach, detectChanges)?",
+      "a": "A ChangeDetectorRef a komponens change detectorához ad kézi vezérlést. markForCheck(): megjelöli a komponenst (és őseit) ellenőrzésre a következő ciklusban — OnPush mellett, ha kívülről érkezett változás. detectChanges(): AZONNAL lefuttatja a change detectiont az adott komponensfára. detach()/reattach(): leválasztja/visszakapcsolja a komponenst a fáról — nagyon nagy, ritkán frissülő nézeteknél manuális vezérléshez. Ezek erős, de óvatosan használandó eszközök; a legtöbb esetben a helyes adatkezelés (immutability, async pipe, signals) elég.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "change-detection",
+        "haladó"
+      ]
+    },
+    {
+      "id": 88,
+      "topic": "signals",
+      "level": "medior",
+      "q": "Mik a Signals, és mi a lényegük?",
+      "a": "A Signal (Angular 16+) egy reaktív érték-tároló: kiolvasható függvényhívással (counter()), és értesíti azokat, akik függenek tőle, ha megváltozik. A lényeg a fine-grained (finomszemcsés) reaktivitás: az Angular pontosan tudja, mely nézetrészek függenek egy signaltól, így csak azokat frissíti — nem kell az egész fát ellenőriznie. Ez az alapja a jövőbeli zoneless Angularnak, és hatékonyabb, kiszámíthatóbb frissítést ad, mint a Zone.js-alapú megközelítés.",
+      "code": "counter = signal(0);\nincrement() { this.counter.update(v => v + 1); }\n// template: {{ counter() }}",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "signals",
+        "reaktivitás"
+      ]
+    },
+    {
+      "id": 89,
+      "topic": "signals",
+      "level": "medior",
+      "q": "Mi a computed signal, és hogyan működik?",
+      "a": "A computed() egy származtatott signal: egy függvényből számol értéket, amely más signalokra hivatkozik. Automatikusan újraszámol, ha bármelyik függősége változik, és memoizál — ha a függőségek nem változtak, a tárolt értéket adja vissza. Nem lehet közvetlenül írni, csak olvasni. Ez a tiszta módja a levezetett állapot kifejezésének (pl. szűrt lista, összeg), template-metódus vagy manuális szinkronizáció helyett.",
+      "code": "count = signal(0);\ndouble = computed(() => this.count() * 2); // auto-frissül",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "signals",
+        "computed"
+      ]
+    },
+    {
+      "id": 90,
+      "topic": "signals",
+      "level": "medior",
+      "q": "Mi az effect, és mikor használod?",
+      "a": "Az effect() egy mellékhatás, amely automatikusan lefut, amikor a benne olvasott signalok bármelyike megváltozik. Tipikus felhasználás: naplózás, localStorage-ba mentés, egy harmadik fél könyvtárának szinkronizálása a signal állapotával. NEM arra való, hogy egy signalból másik signalt számolj — arra a computed van. Az effectet injektálási kontextusban (pl. constructor) hozod létre, és automatikusan takarít a komponens megsemmisülésekor.",
+      "code": "constructor() {\n  effect(() => {\n    localStorage.setItem('count', String(this.count()));\n  });\n}",
+      "appFile": null,
+      "tags": [
+        "signals",
+        "effect"
+      ]
+    },
+    {
+      "id": 91,
+      "topic": "signals",
+      "level": "senior",
+      "q": "Signals vs RxJS — mikor melyiket használnád?",
+      "a": "Nem versenytársak, hanem kiegészítők. Signals: szinkron, aktuális állapot reprezentálására ideális (UI-állapot, származtatott értékek, komponens-lokális adat) — egyszerű, mindig van 'jelenlegi értéke', és jól illeszkedik a templatehez. RxJS: eseményfolyamokra, aszinkron pipeline-okra, időalapú vagy komplex kombinációs logikára erős (HTTP, debounce, kombinálás, retry). Gyakori minta: RxJS-sel kezeled a folyamot, majd a végén toSignal()-lal signallá alakítod a template számára. A senior döntés: állapot -> signal, folyam/esemény -> RxJS.",
+      "code": "// RxJS folyam -> signal a template-hez\nusers = toSignal(this.http.get<User[]>('/api/users'), { initialValue: [] });",
+      "appFile": null,
+      "tags": [
+        "signals",
+        "rxjs",
+        "haladó"
+      ]
+    },
+    {
+      "id": 92,
+      "topic": "performance",
+      "level": "junior",
+      "q": "Hogyan gyorsítod egy Angular app kezdeti betöltését?",
+      "a": "A legfontosabb eszközök: lazy loading (route-onként töltsd a kódot, ne mindent előre), OnPush change detection a felesleges ellenőrzések ellen, tree-shaking és production build (ng build --configuration production) a felesleges kód eltávolítására, képek és eszközök optimalizálása, és szükség esetén SSR/hydration a gyorsabb első megjelenítéshez. Elsőként mindig mérj (Lighthouse, bundle analyzer), és a legnagyobb szűk keresztmetszetet célozd.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "teljesítmény",
+        "alap"
+      ]
+    },
+    {
+      "id": 93,
+      "topic": "performance",
+      "level": "medior",
+      "q": "Mi a trackBy/track, és miért segít a teljesítményen?",
+      "a": "Amikor egy lista frissül, az Angular alapból nem tudja, melyik régi DOM-elem melyik új adatnak felel meg, ezért sok elemet feleslegesen újraépíthet. A track (az @for-ban) vagy trackBy (a régi *ngFor-ban) egy egyedi kulcsot ad minden elemhez, így az Angular csak a valóban változott elemeket módosítja. Nagy vagy gyakran frissülő listáknál ez jelentős különbség, és megőrzi az elemek belső állapotát is (pl. input fókusz).",
+      "code": "@for (task of tasks; track task.id) { ... }",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "teljesítmény",
+        "listák"
+      ]
+    },
+    {
+      "id": 94,
+      "topic": "performance",
+      "level": "medior",
+      "q": "Mi a különbség az AOT és a JIT fordítás között?",
+      "a": "JIT (Just-in-Time): a fordítás a böngészőben, futásidőben történik — lassabb indulás, nagyobb csomag (a fordító is benne van), főleg fejlesztéshez. AOT (Ahead-of-Time): a fordítás a build során, előre megtörténik — gyorsabb indulás, kisebb bundle, korábbi hibajelzés a template-ekben, és biztonságosabb (nincs runtime template-fordítás). A modern Angular production build alapból AOT-ot használ.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "teljesítmény",
+        "build"
+      ]
+    },
+    {
+      "id": 95,
+      "topic": "performance",
+      "level": "senior",
+      "q": "Milyen lépésekben vizsgálnál és javítanál egy lassú Angular alkalmazást?",
+      "a": "Módszeresen, méréssel kezdve — nem tippelve. (1) Profilozz: Lighthouse a betöltésre, Angular DevTools a change detectionre, source-map-explorer/bundle analyzer a csomagméretre. (2) Kezdeti betöltés: lazy loading, felesleges eager importok kiszedése, kép/font optimalizálás, esetleg SSR+hydration. (3) Futásidő: OnPush, track, virtuális görgetés nagy listákhoz, template-metódusok kiváltása pure pipe-pal/computed signallal, felesleges feliratkozások megszüntetése. (4) Hálózat: HTTP-cache, shareReplay, kérés-deduplikáció. Minden lépés után újramérsz, hogy igazold a nyereséget és elkerüld a korai optimalizálást.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "teljesítmény",
+        "haladó",
+        "profiling"
+      ]
+    },
+    {
+      "id": 96,
+      "topic": "performance",
+      "level": "senior",
+      "q": "Mi a virtuális görgetés (Virtual Scrolling), és mikor kell?",
+      "a": "A virtuális görgetés (Angular CDK ScrollingModule) csak a viewportban aktuálisan látható lista-elemeket rendereli a DOM-ba, a többit nem — ahogy görgetsz, dinamikusan cseréli őket. Ez teszi lehetővé több ezer vagy tízezer elemű listák sima megjelenítését, mert a DOM-ban csak néhány tucat csomópont van egyszerre. Akkor kell, ha egy hosszú listát renderelsz, és a sok DOM-elem lassítja a görgetést vagy a change detectiont.",
+      "code": "<cdk-virtual-scroll-viewport itemSize=\"50\">\n  <div *cdkVirtualFor=\"let item of items\">{{ item }}</div>\n</cdk-virtual-scroll-viewport>",
+      "appFile": null,
+      "tags": [
+        "teljesítmény",
+        "cdk",
+        "haladó"
+      ]
+    },
+    {
+      "id": 97,
+      "topic": "testing",
+      "level": "junior",
+      "q": "Hogyan tesztelik az Angular alkalmazásokat?",
+      "a": "Két fő szint van. Unit/komponens tesztek: az egyes komponenseket, service-eket, pipe-okat izoláltan ellenőrzik, jellemzően Jasmine (állítások) + Karma (futtató), vagy egyre inkább Jest segítségével, a TestBed-del konfigurálva. End-to-end (e2e) tesztek: a teljes alkalmazást a felhasználó szemszögéből, böngészőben tesztelik — ma leginkább Cypress vagy Playwright (a régi Protractor kifutott). A jó tesztpiramis: sok gyors unit teszt, kevesebb integrációs, még kevesebb lassú e2e.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "tesztelés",
+        "alap"
+      ]
+    },
+    {
+      "id": 98,
+      "topic": "testing",
+      "level": "medior",
+      "q": "Mi a TestBed, és mire való?",
+      "a": "A TestBed az Angular tesztelési segédeszköze: egy izolált tesztelési modult/környezetet állít fel, ahol konfigurálhatod a tesztelt komponens függőségeit (valós vagy mock service-ek, providerek). Létrehozza a komponens példányát egy ComponentFixture-ön keresztül, amellyel elérheted a komponens-példányt és a renderelt DOM-ot, valamint kézzel futtathatsz change detectiont (fixture.detectChanges()). Így egységesen tesztelhető a komponens logikája és a nézete is.",
+      "code": "TestBed.configureTestingModule({\n  imports: [TasksComponent],\n  providers: [{ provide: TaskService, useValue: mockService }],\n});\nconst fixture = TestBed.createComponent(TasksComponent);",
+      "appFile": null,
+      "tags": [
+        "tesztelés",
+        "testbed"
+      ]
+    },
+    {
+      "id": 99,
+      "topic": "testing",
+      "level": "senior",
+      "q": "Hogyan tesztelnél egy Observable-t vagy aszinkron kódot?",
+      "a": "Több technika van. fakeAsync + tick(): szimulált időben futtatod az aszinkron kódot, a tick()-kel léptetve az időt — determinisztikus, gyors. async/whenStable: megvárja a valós aszinkron műveletek befejeződését. RxJS-marble tesztek: a TestScheduler-rel 'marble diagram' szintaxissal írod le a folyam viselkedését időben, ami a komplex operátor-láncoknál precíz. Service-eknél a HttpTestingController-rel elfogod és vezérled a HTTP-kéréseket mock-válaszokkal, valós hálózat nélkül.",
+      "code": "it('tölt', fakeAsync(() => {\n  component.load();\n  tick();\n  expect(component.data).toBeDefined();\n}));",
+      "appFile": null,
+      "tags": [
+        "tesztelés",
+        "async",
+        "haladó"
+      ]
+    },
+    {
+      "id": 100,
+      "topic": "ssr",
+      "level": "medior",
+      "q": "Mi az SSR (Server-Side Rendering) / Angular Universal?",
+      "a": "Az SSR azt jelenti, hogy az Angular a szerveren előrendereli az oldalt HTML-lé, és a kész HTML-t küldi a böngészőnek. Előnyei: gyorsabb First Contentful Paint (a felhasználó hamarabb lát tartalmat), és jobb SEO (a keresőrobotok kész HTML-t kapnak, nem üres SPA-vázat). A böngészőben ezután a JavaScript 'életre kelti' az oldalt (hydration). Az Angular a @angular/ssr csomaggal és a beépített CLI-támogatással teszi ezt egyszerűvé (korábban 'Angular Universal' néven).",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "ssr",
+        "seo"
+      ]
+    },
+    {
+      "id": 101,
+      "topic": "ssr",
+      "level": "senior",
+      "q": "Mi a hydration, és mi az inkrementális hydration?",
+      "a": "A hydration az a folyamat, amely során a kliensoldali Angular átveszi a szerver által renderelt statikus HTML-t, és 'interaktívvá' teszi: eseménykezelőket köt, felépíti a belső komponens-állapotot — ideális esetben a DOM újraépítése nélkül (non-destructive hydration), elkerülve a villódzást. Az inkrementális hydration (újabb Angular) még tovább megy: a lapnak csak azokat a részeit kelti életre, amelyekre valóban szükség van (pl. amikor a felhasználó interakcióba lép velük vagy a viewportba érnek), tovább csökkentve a kezdeti JavaScript-munkát.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "ssr",
+        "hydration",
+        "haladó"
+      ]
+    },
+    {
+      "id": 102,
+      "topic": "ssr",
+      "level": "medior",
+      "q": "Mi a @defer blokk, és mire jó?",
+      "a": "A @defer (Angular 17+) egy template-szintű lazy loading eszköz: a benne lévő tartalmat (és annak kódját) csak akkor tölti be, amikor egy megadott trigger teljesül — pl. on viewport (a viewportba ér), on interaction (interakció), on idle (a böngésző tétlen), on timer. Van @placeholder (mit mutass addig), @loading (töltés közben) és @error ága. Így a nehéz, nem azonnal szükséges részek (pl. egy chart, egy komment-szekció) nem terhelik a kezdeti betöltést.",
+      "code": "@defer (on viewport) {\n  <app-heavy-chart />\n} @placeholder {\n  <p>Görgess a diagramért</p>\n}",
+      "appFile": null,
+      "tags": [
+        "ssr",
+        "defer",
+        "teljesítmény"
+      ]
+    },
+    {
+      "id": 103,
+      "topic": "tooling",
+      "level": "junior",
+      "q": "Mi az Angular CLI, és mire használod?",
+      "a": "Az Angular CLI a hivatalos parancssori eszköz, amely automatizálja a gyakori feladatokat: új projekt létrehozása (ng new), kódelemek generálása sablonból (ng generate component/service/directive), fejlesztői szerver futtatása élő újratöltéssel (ng serve), production build (ng build), tesztek futtatása (ng test), és frissítés új verzióra (ng update). A CLI biztosítja a bevált projektstruktúrát és konfigurációt, így nem kézzel kell beállítani a build-láncot.",
+      "code": "ng new my-app\nng generate component features/dashboard\nng serve\nng build --configuration production",
+      "appFile": null,
+      "tags": [
+        "cli",
+        "alap"
+      ]
+    },
+    {
+      "id": 104,
+      "topic": "tooling",
+      "level": "medior",
+      "q": "Mit csinál az ng build, és mik a fő optimalizációi?",
+      "a": "Az ng build lefordítja és becsomagolja az alkalmazást a dist/ mappába. Production módban (alap) a fő optimalizációk: AOT-fordítás, tree-shaking (nem használt kód eltávolítása), minification (kód tömörítése), bundling és code splitting (a lazy route-ok külön chunkba kerülnek), és hash-elt fájlnevek a cache-busting érdekében. Az eredmény egy statikus fájlkészlet, amit bármilyen webszerverről vagy CDN-ről (pl. GitHub Pages) ki lehet szolgálni.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "cli",
+        "build"
+      ]
+    },
+    {
+      "id": 105,
+      "topic": "tooling",
+      "level": "senior",
+      "q": "Hogyan elemeznéd és csökkentenéd a bundle méretét?",
+      "a": "Elemzés: az esbuild/webpack build után source-map-explorer-rel vagy a beépített statisztikákkal megnézed, mi foglalja a helyet. Gyakori bűnösök: nagy, feleslegesen teljesen importált könyvtárak (importáld csak a szükséges részt), duplikált függőségek, be nem lazy-loadolt route-ok, nagy assetek. Csökkentés: lazy loading, tree-shakeable importok, könnyebb alternatívák nagy libekre (pl. date-fns a moment helyett), a felesleges polyfillek elhagyása, és a @defer a nehéz, ritkán használt komponensekre. Mérd a nyereséget minden változtatás után.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "cli",
+        "build",
+        "haladó"
+      ]
+    },
+    {
+      "id": 106,
+      "topic": "architecture",
+      "level": "medior",
+      "q": "Hogyan strukturálnál egy nagy Angular alkalmazást mappákra?",
+      "a": "Egy bevált megközelítés a feature-alapú (funkció szerinti) szervezés: minden funkció (pl. tasks, users, auth) saját mappát kap a komponenseivel, service-eivel, modelljeivel. Emellett van egy 'core' réteg (app-szintű singletonok, interceptorok, guardok) és egy 'shared' réteg (újrahasznosítható, buta komponensek, direktívák, pipe-ok). A cél, hogy egy funkción dolgozva minden egy helyen legyen, és a függőségek iránya tiszta maradjon (feature -> shared/core, sose fordítva). A modern Angular standalone komponensekkel ez még laposabb és egyszerűbb.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "architektúra",
+        "struktúra"
+      ]
+    },
+    {
+      "id": 107,
+      "topic": "architecture",
+      "level": "senior",
+      "q": "Mi a facade minta, és mikor használnád?",
+      "a": "A facade egy service, amely elrejti egy komplex alrendszer (pl. egy NgRx store vagy több összefonódó service) részleteit egy egyszerű, magas szintű API mögé. A komponensek csak a facade tiszta metódusait és megfigyelhető állapotát látják (pl. loadTasks(), tasks$), nem az alatta lévő actionöket, selectorokat vagy RxJS-láncokat. Előnye: a komponensek egyszerűbbek és tesztelhetőbbek, az állapotkezelés implementációja pedig lecserélhető anélkül, hogy a komponenseket át kellene írni. Túlzásba vinni viszont felesleges absztrakciós réteget ad.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "architektúra",
+        "minta",
+        "haladó"
+      ]
+    },
+    {
+      "id": 108,
+      "topic": "architecture",
+      "level": "senior",
+      "q": "Hogyan biztosítanád egy megosztott komponens-könyvtár minőségét egy nagy csapatban?",
+      "a": "Több pillér: (1) tiszta, jól dokumentált komponens-API (átgondolt @Input/@Output nevek, minimális felület); (2) smart/dumb szeparáció, hogy a megosztott komponensek buták és újrahasznosíthatók legyenek; (3) alapos, izolált unit tesztek és vizuális dokumentáció (pl. Storybook); (4) konzisztens design-tokenek és stílus-konvenciók; (5) verziózás és changelog, hogy a fogyasztó csapatok követni tudják a változásokat; (6) linter- és formázó-szabályok CI-ben kikényszerítve. A cél, hogy a könyvtár kiszámítható és megbízható legyen a felhasználók számára.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "architektúra",
+        "csapat",
+        "haladó"
+      ]
+    },
+    {
+      "id": 109,
+      "topic": "architecture",
+      "level": "medior",
+      "q": "Mi a barrel file (index.ts), és mik az előnyei/hátrányai?",
+      "a": "A barrel file egy index.ts, amely egy mappa több exportját összefogja és újraexportálja, így egyetlen helyről importálhatók (import { A, B } from './features'). Előny: tisztább, rövidebb import-utak. Hátrány: rosszul használva ronthatja a tree-shakinget és körkörös függőségeket okozhat, ha nem figyelsz a struktúrára. Ökölszabály: kis, jól körülhatárolt modulokhoz hasznos; ne csinálj egyetlen óriás barrelt az egész appnak.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "architektúra",
+        "struktúra"
+      ]
+    },
+    {
+      "id": 110,
+      "topic": "basics",
+      "level": "medior",
+      "q": "Mik az Angular főbb verzió-újításai az utóbbi időben?",
+      "a": "A közelmúlt fő irányai: standalone komponensek (v14-től, v17-től alapértelmezett) az NgModule kiváltására; új beépített control flow (@if/@for/@switch, v17); a @defer blokk template-szintű lazy loadinghoz (v17); Signals a fine-grained reaktivitásért (v16-tól, folyamatosan bővülve); jobb SSR és non-destructive/inkrementális hydration; valamint a zoneless irány felé mozgás. Fontos: a konkrét részletek gyorsan változnak, ezért éles felkészülésnél érdemes a hivatalos changelogot ellenőrizni, mert az én tudásomnak is van egy vágási dátuma.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "verziók"
+      ]
+    },
+    {
+      "id": 111,
+      "topic": "components",
+      "level": "junior",
+      "q": "Mi a különbség a template és a templateUrl között?",
+      "a": "A template inline módon, közvetlenül a dekorátorban tartalmazza a HTML-t (backtick sztringben), ami kis komponenseknél kényelmes és egyben tartja a fájlt. A templateUrl egy külön .html fájlra mutat, ami nagyobb template-eknél tisztább, jobb szerkesztő-támogatással. Ugyanez a párhuzam a styles (inline CSS) és a styleUrls (külön fájl) között. A választás ízlés és méret kérdése; sok csapat kis komponenseknél inline-t, nagyoknál külön fájlt használ.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "komponens"
+      ]
+    },
+    {
+      "id": 112,
+      "topic": "templates",
+      "level": "medior",
+      "q": "Mi a biztonságos érték (safe navigation) és az elvis operátor a template-ben?",
+      "a": "A safe navigation operátor (?.) megvéd a null/undefined hozzáféréstől a template-ben: a {{ user?.name }} nem dob hibát, ha a user még null (pl. adat még nem érkezett meg), csak üresen jelenik meg. Enélkül egy 'cannot read property of null' hibát kapnál a betöltés alatti pillanatban. Hasznos aszinkron adatoknál. Modern alternatíva az @if-fel körbevenni a blokkot, ami tisztább, ha több mezőt is használsz.",
+      "code": "<p>{{ user?.address?.city }}</p>  <!-- nem hibázik, ha user null -->",
+      "appFile": null,
+      "tags": [
+        "template"
+      ]
+    },
+    {
+      "id": 113,
+      "topic": "rxjs",
+      "level": "junior",
+      "q": "Mi a pipe() metódus az RxJS-ben?",
+      "a": "A pipe() az a metódus, amellyel operátorokat láncolsz egy Observable-re. Balról jobbra alkalmazza őket: minden operátor egy új, transzformált Observable-t ad vissza, anélkül, hogy az eredetit módosítaná. Ez teszi az RxJS-t olvashatóvá és komponálhatóvá — minden lépés egy tiszta transzformáció.",
+      "code": "source$.pipe(\n  filter(x => x > 0),\n  map(x => x * 2)\n).subscribe(console.log);",
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "alap"
+      ]
+    },
+    {
+      "id": 114,
+      "topic": "di",
+      "level": "junior",
+      "q": "Mi az @Injectable dekorátor?",
+      "a": "Az @Injectable megjelöl egy osztályt, hogy az Angular dependency injection rendszere kezelheti: azaz injektálható másokba, ÉS lehetnek saját injektált függőségei. A providedIn: 'root' opcióval egyben regisztrálja is app-szintű singletonként. Service-eknél gyakorlatilag mindig ki kell tenni, ha az osztály maga is kér függőséget a constructorában vagy inject()-tel.",
+      "code": "@Injectable({ providedIn: 'root' })\nexport class UserService {\n  private http = inject(HttpClient);\n}",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "di",
+        "alap"
+      ]
+    },
+    {
+      "id": 115,
+      "topic": "forms",
+      "level": "junior",
+      "q": "Mi az ngModel, és mit csinál?",
+      "a": "Az ngModel a template-driven forms központi direktívája: kétirányú adatkötést hoz létre egy űrlapmező és a komponens egy property-je között. A [(ngModel)]=\"name\" szintaxissal a mező értéke és a property mindig szinkronban marad — ha a felhasználó gépel, frissül a property, és fordítva. A FormsModule importja szükséges hozzá.",
+      "code": "<input [(ngModel)]=\"username\" name=\"username\" />\n<p>Üdv, {{ username }}</p>",
+      "appFile": null,
+      "tags": [
+        "forms",
+        "alap"
+      ]
+    },
+    {
+      "id": 116,
+      "topic": "http",
+      "level": "junior",
+      "q": "Milyen HTTP-metódusokat támogat a HttpClient?",
+      "a": "A HttpClient a szokásos REST-metódusokat támogatja: get (adat lekérése), post (új erőforrás létrehozása), put (teljes csere), patch (részleges frissítés), delete (törlés), valamint head és options. Mindegyik Observable-t ad vissza, és generikus típussal megadható a válasz alakja. A body-t és a beállításokat (headerök, paraméterek) argumentumként adod át.",
+      "code": "this.http.post<Task>('/api/tasks', newTask);\nthis.http.delete(`/api/tasks/${id}`);",
+      "appFile": "src/app/services/user.service.ts",
+      "tags": [
+        "http",
+        "alap"
+      ]
+    },
+    {
+      "id": 117,
+      "topic": "change",
+      "level": "junior",
+      "q": "Mikor fut le a change detection?",
+      "a": "Alapból (Zone.js mellett) akkor, amikor egy aszinkron esemény befejeződik, amit a Zone.js figyel: felhasználói események (kattintás, gépelés), HTTP-válaszok, időzítők (setTimeout/setInterval), Promise-ok feloldása. Ekkor az Angular végigmegy a komponensfán és frissíti a nézetet. Manuálisan is kiváltható (ChangeDetectorRef.detectChanges), és a jövőbeli zoneless módban a Signals fogja finomabban vezérelni.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "change-detection",
+        "alap"
+      ]
+    },
+    {
+      "id": 118,
+      "topic": "signals",
+      "level": "junior",
+      "q": "Hogyan hozol létre és frissítesz egy signalt?",
+      "a": "A signal(kezdőérték)-kel hozol létre egy írható signalt. Az értékét függvényhívással olvasod (mySignal()). Frissíteni kétféleképp lehet: set(újérték) — közvetlenül új értéket adsz; update(régi => új) — a jelenlegi értékből számolsz újat. A template-ben egyszerűen meghívod ({{ mySignal() }}), és az Angular automatikusan frissíti a nézetet, amikor változik.",
+      "code": "count = signal(0);\ncount.set(5);\ncount.update(v => v + 1);",
+      "appFile": "src/app/services/task.service.ts",
+      "tags": [
+        "signals",
+        "alap"
+      ]
+    },
+    {
+      "id": 119,
+      "topic": "basics",
+      "level": "junior",
+      "q": "Mit jelent, hogy az Angular 'opinionated' keretrendszer?",
+      "a": "Az 'opinionated' (véleményes) azt jelenti, hogy az Angular határozott döntéseket hoz helyetted arról, hogyan épüljön fel az alkalmazás: adott projektstruktúra, beépített DI, router, forms, HTTP, és ajánlott minták. Ez csökkenti a 'melyik könyvtárat válasszam' döntéseket, és egységességet ad — különösen nagy csapatoknál előny, mert mindenki hasonlóan strukturált kódot ír. A React ezzel szemben rugalmasabb, de több döntést hagy a fejlesztőre.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap"
+      ]
+    },
+    {
+      "id": 120,
+      "topic": "basics",
+      "level": "medior",
+      "q": "Mi a különbség a keretrendszer (framework) és a könyvtár (library) között?",
+      "a": "A könyvtár olyan kód, amelyet TE hívsz meg, amikor épp szükséged van rá — te irányítasz (pl. lodash, vagy önmagában a React). A keretrendszer ezzel szemben a te kódodat hívja meg a megfelelő pillanatokban — ez az 'inversion of control': a keretrendszer adja a vázat és az életciklust, te pedig a réseket töltöd ki (komponensek, lifecycle hookok). Az Angular keretrendszer: te a szabályai szerint írsz komponenseket, ő vezérli a futásukat.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap"
+      ]
+    },
+    {
+      "id": 121,
+      "topic": "typescript",
+      "level": "junior",
+      "q": "Mi az enum a TypeScriptben?",
+      "a": "Az enum elnevezett konstansok halmaza, amely olvashatóbbá teszi a kódot a 'mágikus' számok/stringek helyett. Pl. egy státusz mezőnél Status.Active kifejezőbb, mint egy nyers 0 vagy 'active'. Megjegyzés: a modern Angular/TS kódban gyakran union literal típust (pl. 'active' | 'inactive') használnak enum helyett, mert könnyebb, tree-shakelhetőbb és nem generál extra futásidejű kódot.",
+      "code": "enum Status { Active, Inactive, Pending }\nlet s: Status = Status.Active;",
+      "appFile": null,
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "id": 122,
+      "topic": "typescript",
+      "level": "medior",
+      "q": "Mi a különbség az any, unknown és never típus között?",
+      "a": "any: kikapcsolja a típusellenőrzést az adott értékre — kerülendő, mert elveszíted a biztonságot. unknown: 'biztonságos any' — bármit befogad, de használat előtt szűkíteni/ellenőrizni kell a típusát, így a fordító véd. never: olyan érték típusa, ami sosem fordul elő (pl. egy függvény, ami mindig dob hibát, vagy egy kimerítő switch elérhetetlen ága). A never hasznos a teljesség (exhaustiveness) ellenőrzésére.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "typescript",
+        "haladó"
+      ]
+    },
+    {
+      "id": 123,
+      "topic": "components",
+      "level": "medior",
+      "q": "Mi a host elem, és hogyan stílusozod (:host)?",
+      "a": "A host elem maga a komponens selectorának megfelelő DOM-elem (pl. <app-card>), amelybe a komponens template-je renderelődik. A komponens CSS-ében a :host pszeudo-osztállyal célozhatod magát ezt az elemet (pl. blokk-megjelenítés, keret). A :host(.aktiv) feltételes, a :host-context(...) pedig a szülő kontextus alapján stílusoz. Ez tiszta módot ad a komponens 'kívülről látott' megjelenésének szabályozására.",
+      "code": ":host { display: block; padding: 12px; }\n:host(.selected) { border: 2px solid blue; }",
+      "appFile": null,
+      "tags": [
+        "komponens",
+        "css"
+      ]
+    },
+    {
+      "id": 124,
+      "topic": "directives",
+      "level": "senior",
+      "q": "Hogyan írnál strukturális direktívát (mikrosyntax)?",
+      "a": "Egy strukturális direktíva egy TemplateRef-et és egy ViewContainerRef-et injektál, majd feltétel szerint be- vagy kirendereli a template-et a createEmbeddedView/clear hívásokkal. A *-prefix a 'mikrosyntax' cukorka: az Angular <ng-template>-té alakítja. Egyéni strukturálishoz egy setter @Input-ban reagálsz a bemenetre. Ritkán van rá szükség (a beépítettek lefedik a legtöbb esetet), de pl. egy jogosultság-alapú *appHasRole direktívánál hasznos.",
+      "code": "@Directive({ selector: '[appUnless]', standalone: true })\nexport class UnlessDirective {\n  private tpl = inject(TemplateRef);\n  private vcr = inject(ViewContainerRef);\n  @Input() set appUnless(cond: boolean) {\n    cond ? this.vcr.clear() : this.vcr.createEmbeddedView(this.tpl);\n  }\n}",
+      "appFile": null,
+      "tags": [
+        "direktíva",
+        "haladó"
+      ]
+    },
+    {
+      "id": 125,
+      "topic": "communication",
+      "level": "senior",
+      "q": "Mik a signal inputs és a modern input/output API (v17.1+)?",
+      "a": "Az újabb Angular signal-alapú input/output API-t vezet be a dekorátorok mellé. Az input() egy read-only signalt ad, amely a szülőtől kapott értéket tükrözi (input.required<T>() a kötelezőhöz), és reaktívan felhasználható computed-ekben. Az output() az EventEmitter modernebb megfelelője. A model() kétirányú kötést tesz lehetővé signal-alapon. Ez jobban integrálódik a Signals reaktivitással, mint a klasszikus @Input/@Output. A klasszikus dekorátorok továbbra is érvényesek.",
+      "code": "count = input.required<number>();      // signal input\ndoubled = computed(() => this.count() * 2);\nchange = output<number>();",
+      "appFile": null,
+      "tags": [
+        "kommunikáció",
+        "signals",
+        "haladó"
+      ]
+    },
+    {
+      "id": 126,
+      "topic": "di",
+      "level": "medior",
+      "q": "Mi a useValue, useClass, useFactory és useExisting a providerekben?",
+      "a": "Ezek a provider 'receptjei', amelyek megmondják, hogyan állítsa elő az injector az értéket. useClass: egy osztályt példányosít (akár egy másikat cserélve be a token mögé). useValue: egy kész értéket ad vissza (konfig, konstans). useFactory: egy függvény állítja elő az értéket, akár más függőségekből (deps). useExisting: egy meglévő tokenre mutató álnév (aliasing). Ezekkel finoman testre szabható, mit kap a komponens egy adott token kérésekor — tesztelésnél a mock-cserére is ideális.",
+      "code": "{ provide: Logger, useClass: ConsoleLogger }\n{ provide: API_URL, useValue: 'https://...' }\n{ provide: Store, useFactory: createStore, deps: [Config] }",
+      "appFile": null,
+      "tags": [
+        "di",
+        "provider",
+        "haladó"
+      ]
+    },
+    {
+      "id": 127,
+      "topic": "routing",
+      "level": "medior",
+      "q": "Mi a query paraméter, és miben más, mint a route paraméter?",
+      "a": "A route paraméter az útvonal részét képezi és jellemzően kötelező az erőforrás azonosításához (pl. /user/42, ahol 42 az id). A query paraméter az URL ?-utáni, opcionális kulcs-érték párja, jellemzően szűrésre, rendezésre, lapozásra (pl. /users?sort=name&page=2). A query paramétereket az ActivatedRoute.queryParamMap-ből olvasod, és navigációkor a queryParams opcióban adod meg. Megőrződnek a navigáció során, ha úgy állítod be.",
+      "code": "this.router.navigate(['/users'], { queryParams: { page: 2 } });\nthis.route.queryParamMap.subscribe(p => this.page = p.get('page'));",
+      "appFile": null,
+      "tags": [
+        "routing"
+      ]
+    },
+    {
+      "id": 128,
+      "topic": "routing",
+      "level": "senior",
+      "q": "Mik a route-szintű providerek és a környezeti (environment) injectorok?",
+      "a": "A route konfigurációban megadhatsz providers tömböt, így egy útvonal (és gyerekei) saját, lazy-loadolt service-példányt kaphatnak — hasznos, ha egy funkció-terület elszigetelt állapotot vagy konfigurációt igényel. Ezek 'environment injector' szinten élnek, a lazy-betöltött terület élettartamához kötve. Ez tisztább, mint mindent a rootba tenni, és segít a bundle-szeletelésben is: a funkció-specifikus service csak akkor töltődik, ha odanavigálsz.",
+      "code": "{\n  path: 'admin',\n  loadChildren: () => import('./admin.routes'),\n  providers: [AdminService],\n}",
+      "appFile": null,
+      "tags": [
+        "routing",
+        "di",
+        "haladó"
+      ]
+    },
+    {
+      "id": 129,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Mi a hot és cold Observable közötti különbség?",
+      "a": "A cold Observable minden feliratkozónak külön, saját végrehajtást ad — az adattermelés a subscribe-nál indul (pl. egy HTTP-hívás minden subscribe-ra újra lefut). A hot Observable megosztott: az értékek attól függetlenül keletkeznek, hogy ki és mikor iratkozik fel (pl. egérmozgás-események, egy Subject). A cold-ból hot-tá alakítás share()/shareReplay() operátorral történik — ez fontos, hogy egy HTTP-kérés ne fusson le többször több feliratkozó miatt.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "haladó"
+      ]
+    },
+    {
+      "id": 130,
+      "topic": "rxjs",
+      "level": "senior",
+      "q": "Mi a shareReplay, és milyen csapdái vannak?",
+      "a": "A shareReplay(n) multicast-tá teszi a folyamot ÉS visszajátssza az utolsó n értéket az új feliratkozóknak — ideális pl. egy egyszer lekért konfiguráció megosztására. Csapda: alapból nem szünteti meg a forrás-feliratkozást, ha nulla feliratkozó marad, így egy 'élő' forrásnál (nem befejeződő) memory leaket okozhat. Megoldás: { bufferSize: 1, refCount: true } konfiguráció, ami leiratkozik, ha senki sem figyel. HTTP-nél (ami befejeződik) általában biztonságos.",
+      "code": "config$ = this.http.get('/api/config').pipe(shareReplay({ bufferSize: 1, refCount: true }));",
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "haladó"
+      ]
+    },
+    {
+      "id": 131,
+      "topic": "http",
+      "level": "medior",
+      "q": "Hogyan adsz query paramétereket és headeröket egy HTTP-kéréshez?",
+      "a": "A get második argumentumában egy options objektumot adsz át params (HttpParams) és headers (HttpHeaders) kulcsokkal. A HttpParams immutable — a set/append új példányt ad vissza. Így tisztán, típusosan építed fel a lekérdezést.",
+      "code": "const params = new HttpParams().set('page', '2').set('size', '20');\nthis.http.get<User[]>('/api/users', { params });",
+      "appFile": null,
+      "tags": [
+        "http"
+      ]
+    },
+    {
+      "id": 132,
+      "topic": "http",
+      "level": "senior",
+      "q": "Mi az interceptor-lánc sorrendje, és hogyan kezelnél több interceptort?",
+      "a": "Az interceptorok láncot alkotnak: a kimenő kérés a regisztrálás sorrendjében halad át rajtuk, a bejövő válasz pedig fordított sorrendben tér vissza. Ezért a sorrend számít — pl. az auth-token hozzáadó interceptor fusson a logoló előtt, hogy a log már a végleges kérést lássa. Minden interceptor a next(req)-et hívja a lánc folytatásához, és a visszatérő Observable-t módosíthatja (pl. globális hibakezelés catchError-ral). Külön interceptort érdemes csinálni feladatonként (auth, logging, error, loading), nem egy monolitikusat.",
+      "code": "provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor, errorInterceptor]))",
+      "appFile": "src/app/services/auth.interceptor.ts",
+      "tags": [
+        "http",
+        "haladó"
+      ]
+    },
+    {
+      "id": 133,
+      "topic": "forms",
+      "level": "medior",
+      "q": "Mik a form állapotok (touched, dirty, pristine, valid)?",
+      "a": "Ezek a kontroll/csoport állapotát írják le a validáció és a felhasználói interakció szempontjából. pristine/dirty: változott-e az érték a felhasználó által (pristine = még nem). touched/untouched: kapott-e majd elveszített-e fókuszt a mező (touched = már 'megérintette'). valid/invalid: átmegy-e a validátorokon. Ezek alapján döntöd el, mikor mutass hibaüzenetet — jellemzően csak akkor, ha touched ÉS invalid, hogy ne riogasd a felhasználót gépelés közben.",
+      "code": "@if (email.invalid && email.touched) { <span>Hibás e-mail</span> }",
+      "appFile": null,
+      "tags": [
+        "forms"
+      ]
+    },
+    {
+      "id": 134,
+      "topic": "forms",
+      "level": "senior",
+      "q": "Hogyan valósítanál meg dinamikus űrlapot (futásidőben változó mezőkkel)?",
+      "a": "Reactive forms-szal, jellemzően FormArray-jel. A mezők/csoportok listáját programozottan bővíted vagy szűkíted (push/removeAt), és a template-ben @for-ral rendereled a FormArray kontrolljait. Egy metaadat-vezérelt megközelítésben egy konfigurációs objektumból (mező-definíciók listája) építed fel az egész űrlapot dinamikusan — ez skálázódik jól, ha az űrlapok szerkezete adatvezérelt (pl. admin által szerkeszthető kérdőív).",
+      "code": "get phones() { return this.form.get('phones') as FormArray; }\naddPhone() { this.phones.push(new FormControl('')); }",
+      "appFile": null,
+      "tags": [
+        "forms",
+        "haladó"
+      ]
+    },
+    {
+      "id": 135,
+      "topic": "pipes",
+      "level": "junior",
+      "q": "Mik a leggyakoribb beépített pipe-ok?",
+      "a": "date (dátumformázás), uppercase/lowercase/titlecase (szövegformázás), currency (pénznem), decimal/number (számformázás), percent (százalék), json (objektum kiírása debughoz), slice (tömb/string szeletelése), keyvalue (objektum kulcs-érték párokra bontása iteráláshoz), és az async (Observable/Promise fogyasztása). Ezek lefedik a megjelenítési igények nagy részét, egyéni pipe csak a maradékhoz kell.",
+      "code": "{{ total | currency:'HUF':'symbol':'1.0-0' }}\n{{ createdAt | date:'short' }}",
+      "appFile": null,
+      "tags": [
+        "pipe"
+      ]
+    },
+    {
+      "id": 136,
+      "topic": "change",
+      "level": "medior",
+      "q": "Mi az az ExpressionChangedAfterItHasBeenCheckedError, és miért fordul elő?",
+      "a": "Ez egy fejlesztői módban jelentkező hiba, amely akkor keletkezik, ha egy érték megváltozik AZUTÁN, hogy az Angular már ellenőrizte az adott change detection ciklusban — jellemzően, ha egy szülő property-t egy gyerek életciklus-hookjában (pl. ngAfterViewInit) módosítasz. Az Angular ilyenkor inkonzisztenciát észlel a nézet és a modell között. Megoldás: a módosítást a következő ciklusra halasztod (pl. Promise.resolve().then(...) vagy setTimeout), vagy a logikát korábbi hookba/megfelelő helyre mozgatod. Éles (production) buildben ez az ellenőrzés kikapcsol.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "change-detection",
+        "haladó",
+        "hiba"
+      ]
+    },
+    {
+      "id": 137,
+      "topic": "signals",
+      "level": "senior",
+      "q": "Mi a toSignal és a toObservable, és mikor hidalnak át?",
+      "a": "A @angular/core/rxjs-interop csomag hídja a két világnak. toSignal(observable$): egy Observable-t signallá alakít, feliratkozik rá, és mindig a legutóbbi értékét adja — a template-ben így RxJS-adatot használhatsz async pipe nélkül, és automatikusan takarít. toObservable(signal): egy signalt Observable-lé alakít, hogy RxJS-operátorokkal (debounce, switchMap) dolgozhass rajta. Együtt lehetővé teszik, hogy a folyam-logikát RxJS-ben, az állapot-megjelenítést pedig signalokban tartsd.",
+      "code": "users = toSignal(this.http.get<User[]>('/api/users'), { initialValue: [] });",
+      "appFile": null,
+      "tags": [
+        "signals",
+        "rxjs",
+        "haladó"
+      ]
+    },
+    {
+      "id": 138,
+      "topic": "testing",
+      "level": "medior",
+      "q": "Hogyan mock-olsz egy service-t egy komponens tesztben?",
+      "a": "A TestBed providers tömbjében a valós service-t lecseréled egy hamis megvalósításra: { provide: TaskService, useValue: mockObject } — ahol a mock a szükséges metódusokat adja (pl. jasmine.createSpyObj-ból vagy egy egyszerű objektumból). Így a komponenst a valós hálózat/logika nélkül, izoláltan teszteled, és ellenőrizheted, hogy a megfelelő metódusokat hívta-e. Ez gyorsabb, determinisztikusabb teszteket ad.",
+      "code": "const mock = jasmine.createSpyObj('TaskService', ['getTasks']);\nmock.getTasks.and.returnValue(of([]));\nTestBed.configureTestingModule({ providers: [{ provide: TaskService, useValue: mock }] });",
+      "appFile": null,
+      "tags": [
+        "tesztelés"
+      ]
+    },
+    {
+      "id": 139,
+      "topic": "basics",
+      "level": "junior",
+      "q": "Mi a komponensfa (component tree)?",
+      "a": "A komponensfa az alkalmazás komponenseinek hierarchikus szerkezete: a gyökér a root komponens (pl. AppComponent), amelybe gyerekkomponensek ágyazódnak, azokba további gyerekek, és így tovább. Az adat jellemzően lefelé áramlik (@Input), az események felfelé (@Output). A change detection és az injector-hierarchia is ezt a fát követi. A jó fa-struktúra tiszta felelősség-megosztást tükröz.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap"
+      ]
+    },
+    {
+      "id": 140,
+      "topic": "components",
+      "level": "medior",
+      "q": "Mi az ngOnChanges, és mit kapsz meg benne?",
+      "a": "Az ngOnChanges egy életciklus-hook, amely minden alkalommal lefut, amikor egy @Input értéke megváltozik (az első beállítást is beleértve, az ngOnInit ELŐTT). Egy SimpleChanges objektumot kap, amely input-nevenként tartalmazza a korábbi (previousValue) és az aktuális (currentValue) értéket, valamint hogy ez az első változás-e (firstChange). Akkor hasznos, ha egy input változására reagálni kell (pl. újraszámolni valamit). Megjegyzés: objektum-mutációt nem érzékel, csak referencia-változást.",
+      "code": "ngOnChanges(changes: SimpleChanges) {\n  if (changes['task']) { this.recompute(); }\n}",
+      "appFile": null,
+      "tags": [
+        "komponens",
+        "lifecycle"
+      ]
+    },
+    {
+      "id": 141,
+      "topic": "components",
+      "level": "senior",
+      "q": "Mikor használnád az afterRender / afterNextRender hookot (v16+)?",
+      "a": "Ezek az újabb hookok akkor futnak, amikor a böngésző már renderelte a DOM-ot — kifejezetten a böngésző-specifikus, DOM-mérést vagy harmadik fél könyvtár-integrációt igénylő logikához (pl. egy chart-könyvtár inicializálása a végleges méretekhez). Fontos: SSR-ben NEM futnak (csak böngészőben), ami pontosan a céljuk — így biztonságosan tehetsz beléjük DOM-függő kódot anélkül, hogy a szerver-renderelés elhasalna. Az afterNextRender egyszer, az afterRender minden render után fut.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "komponens",
+        "ssr",
+        "haladó"
+      ]
+    },
+    {
+      "id": 142,
+      "topic": "di",
+      "level": "senior",
+      "q": "Mik a multi providerek, és mire használják?",
+      "a": "A multi: true opcióval több providert regisztrálhatsz UGYANARRA a tokenre, és az injector egy TÖMBÖT ad vissza az összes értékkel — nem az utolsó felülírja az előzőt. Az Angular maga is ezt használja (pl. HTTP_INTERCEPTORS, több validátor). Saját bővíthető rendszereknél hasznos: egy plugin-token, amibe több modul is beregisztrálhatja a maga bővítményét, és a fogyasztó az egészet megkapja listaként.",
+      "code": "{ provide: PLUGIN, useClass: FooPlugin, multi: true }\n{ provide: PLUGIN, useClass: BarPlugin, multi: true }\n// inject(PLUGIN) -> [FooPlugin, BarPlugin]",
+      "appFile": null,
+      "tags": [
+        "di",
+        "haladó"
+      ]
+    },
+    {
+      "id": 143,
+      "topic": "rxjs",
+      "level": "junior",
+      "q": "Mi a map és a filter operátor?",
+      "a": "A map minden kibocsátott értéket transzformál egy függvénnyel (pl. objektumból egy mezőt emel ki, vagy számol vele) — annyi értéket ad ki, amennyit kapott. A filter csak azokat az értékeket engedi tovább, amelyekre egy feltétel igaz, a többit eldobja. Ez a két legalapvetőbb transzformáló operátor, közvetlen megfelelői a tömb-metódusoknak, csak időben, folyamon.",
+      "code": "source$.pipe(\n  filter(n => n % 2 === 0),\n  map(n => n * 10)\n)",
+      "appFile": null,
+      "tags": [
+        "rxjs"
+      ]
+    },
+    {
+      "id": 144,
+      "topic": "rxjs",
+      "level": "medior",
+      "q": "Mi a takeUntil és a takeUntilDestroyed?",
+      "a": "A takeUntil(notifier$) addig engedi a folyamot, amíg egy másik 'jelző' observable nem bocsát ki értéket — akkor befejezi (és leiratkozik). Klasszikusan egy destroy$ Subjecttel kombinálják a komponens megsemmisülésekori automatikus leiratkozáshoz. A takeUntilDestroyed() (Angular 16+) ezt beépítve, egyszerűbben adja: injektálási kontextusban automatikusan a komponens élettartamához köti a folyamot, így nem kell kézzel destroy$ Subjectet karbantartani.",
+      "code": "source$.pipe(takeUntilDestroyed()).subscribe(...);",
+      "appFile": "src/app/components/tasks.component.ts",
+      "tags": [
+        "rxjs",
+        "memory-leak"
+      ]
+    },
+    {
+      "id": 145,
+      "topic": "performance",
+      "level": "medior",
+      "q": "Mi a preloading stratégia a lazy loadolt route-oknál?",
+      "a": "A lazy loading alapból csak navigációkor tölti a chunkot, ami az első látogatáskor pici késleltetést okozhat. A preloading ezt enyhíti: a kezdeti betöltés UTÁN, a háttérben előre letölti a lazy modulokat, hogy navigációkor már készen legyenek. A PreloadAllModules mindet előtölti; egyéni stratégiával szelektíven (pl. csak a valószínűleg használt route-okat) is lehet. Így a kezdeti bundle kicsi marad, de a navigáció mégis azonnali.",
+      "code": "provideRouter(routes, withPreloading(PreloadAllModules))",
+      "appFile": null,
+      "tags": [
+        "teljesítmény",
+        "routing"
+      ]
+    },
+    {
+      "id": 146,
+      "topic": "performance",
+      "level": "senior",
+      "q": "Mi a memoizáció, és hol alkalmaznád Angularban?",
+      "a": "A memoizáció egy technika, amely egy tiszta függvény eredményét eltárolja a bemenetéhez, így azonos bemenetnél nem számol újra. Angularban ez természetesen jelenik meg a pure pipe-okban (csak referencia-változáskor számolnak) és a computed signalokban (memoizált származtatott érték). Manuálisan is használható drága számításoknál. A lényeg: a template-ben ismételten kiértékelt drága logikát memoizált formába (pipe/computed) tenni, hogy a change detection ne futtassa feleslegesen újra.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "teljesítmény",
+        "haladó"
+      ]
+    },
+    {
+      "id": 147,
+      "topic": "testing",
+      "level": "junior",
+      "q": "Mi a különbség a unit és az e2e teszt között?",
+      "a": "A unit teszt egy kis, izolált egységet ellenőriz (egy komponens, service vagy pipe logikáját), a függőségeit mock-olva — gyors és pontosan lokalizálja a hibát. Az e2e (end-to-end) teszt a teljes, futó alkalmazást vizsgálja a felhasználó szemszögéből, valódi böngészőben (pl. 'jelentkezz be, hozz létre egy feladatot, ellenőrizd, hogy megjelent') — lassabb, de a valós használatot igazolja. A jó stratégia sok unit tesztet és kevesebb, kritikus út-lefedő e2e tesztet kombinál.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "tesztelés"
+      ]
+    },
+    {
+      "id": 148,
+      "topic": "architecture",
+      "level": "medior",
+      "q": "Mi az a core és shared modul/réteg koncepció?",
+      "a": "A core réteg az egyszer példányosuló, app-szintű dolgokat tartalmazza: singleton service-ek, HTTP interceptorok, guardok, app-szintű konfiguráció — olyasmi, amiből egy van az egész appban. A shared réteg az újrahasznosítható, állapotmentes építőelemeket: buta (presentational) komponensek, direktívák, pipe-ok, amelyeket több feature is használ. A feature rétegek ezekre támaszkodnak. Ez a szeparáció tisztán tartja a függőségek irányát és megelőzi a duplikációt. Standalone világban ez inkább mappa-konvenció, mint külön NgModule.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "architektúra",
+        "struktúra"
+      ]
+    },
+    {
+      "id": 149,
+      "topic": "basics",
+      "level": "senior",
+      "q": "Hogyan magyaráznád el az Angular renderelési folyamatát egy junior fejlesztőnek?",
+      "a": "Nagy vonalakban: a böngésző betölti a main.ts-t, ami bootstrappeli a root komponenst. Az Angular felépíti a komponensfát, minden komponens template-jét kiértékeli és a DOM-ba rendereli, a data bindingot bekötve. Ezután a change detection tartja szinkronban a nézetet az adattal: valahányszor egy figyelt esemény (kattintás, HTTP-válasz, időzítő) történik, az Angular végigmegy a fán, összeveti az értékeket, és frissíti az eltérő DOM-részeket. Modern irány: a Signals ezt célzottabbá teszi, csak a valóban érintett részeket frissítve. A kulcsüzenet: te az állapotot írod le, az Angular gondoskodik a DOM-ról.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "alap",
+        "haladó"
+      ]
+    },
+    {
+      "id": 150,
+      "topic": "typescript",
+      "level": "junior",
+      "q": "Mi az opcionális property és a nem-null assertion (!)?",
+      "a": "Az opcionális property a ?-lal jelölt mező, amely lehet undefined is (pl. name?: string). A nem-null assertion operátor (!) azt mondja a fordítónak: 'bízz bennem, ez nem null/undefined itt', kihagyva az ellenőrzést (pl. this.value!.length). Óvatosan használandó, mert ha tévedsz, futásidejű hiba lesz. Angularban gyakran látod @ViewChild vagy @Input mezőknél a definite assignment (!) jelölést, jelezve, hogy a keretrendszer később állítja be.",
+      "code": "@Input() task!: Task;   // az Angular állítja be\nuser?.email;            // opcionális elérés",
+      "appFile": null,
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "id": 151,
+      "topic": "components",
+      "level": "junior",
+      "q": "Mi a selector, és milyen fajtái vannak?",
+      "a": "A selector határozza meg, hogyan illeszted be a komponenst a HTML-be. Leggyakoribb az elem-selector (selector: 'app-tasks' -> <app-tasks>). Lehet attribútum-selector (selector: '[appFoo]' -> bármely elemen mint attribútum, tipikusan direktíváknál) vagy osztály-selector is. Az elem-selectorokhoz konvenció szerint prefixet használunk (pl. 'app-'), hogy elkerüljük az ütközést a natív vagy más könyvtár elemeivel.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "komponens"
+      ]
+    },
+    {
+      "id": 152,
+      "topic": "directives",
+      "level": "junior",
+      "q": "Mi a *ngIf else ág, és hogyan használod?",
+      "a": "A régi *ngIf-nél az else ág egy ng-template-re mutat, amit akkor jelenít meg, ha a feltétel hamis. A then is megadható. A modern @if szintaxis ezt tisztábban, template-referencia nélkül oldja meg @else blokkal. Mindkettő ugyanazt a célt szolgálja: feltételtől függő megjelenítés két állapot között.",
+      "code": "<div *ngIf=\"loaded; else loading\">Kész</div>\n<ng-template #loading>Betöltés...</ng-template>\n<!-- Modern: -->\n@if (loaded) { Kész } @else { Betöltés... }",
+      "appFile": null,
+      "tags": [
+        "direktíva",
+        "control-flow"
+      ]
+    },
+    {
+      "id": 153,
+      "topic": "communication",
+      "level": "medior",
+      "q": "Mik a @ViewChildren és @ContentChildren?",
+      "a": "A többes számú változatok: a @ViewChildren egy QueryList-et ad vissza a template-ben található ÖSSZES egyező elemről/komponensről (nem csak az elsőről), a @ContentChildren pedig a vetített tartalomból. A QueryList iterálható és reaktív (changes Observable), így követhető, ha az elemek listája változik (pl. dinamikusan hozzáadott gyerekek). Akkor kell, ha egy komponensnek több azonos típusú gyerekét kell egyben kezelnie (pl. egy tab-konténer a tab-jait).",
+      "code": "@ViewChildren(TaskItemComponent) items!: QueryList<TaskItemComponent>;",
+      "appFile": null,
+      "tags": [
+        "kommunikáció",
+        "haladó"
+      ]
+    },
+    {
+      "id": 154,
+      "topic": "routing",
+      "level": "junior",
+      "q": "Mik a gyerek- (child) route-ok?",
+      "a": "A gyerek-route-ok beágyazott navigációt tesznek lehetővé: egy szülő útvonalnak van egy children tömbje, és a szülő komponens template-jében egy saját <router-outlet> jeleníti meg az aktív gyereket. Tipikus eset egy elrendezés (layout) fix kerettel (fejléc, menü) és egy belső területtel, ahol a gyerek-nézetek váltakoznak (pl. /dashboard/overview, /dashboard/stats). Így a közös keret egyszer renderelődik, csak a belső rész cserélődik.",
+      "code": "{ path: 'dashboard', component: DashboardComponent, children: [\n  { path: 'overview', component: OverviewComponent },\n] }",
+      "appFile": null,
+      "tags": [
+        "routing"
+      ]
+    },
+    {
+      "id": 155,
+      "topic": "rxjs",
+      "level": "senior",
+      "q": "Hogyan kezelnél egy 'race condition'-t vagy elavult választ egy keresőnél?",
+      "a": "A klasszikus probléma: a felhasználó gyorsan gépel, több kérés indul, és egy korábbi kérés válasza a későbbi után érkezik meg, elavult eredményt mutatva. A megoldás a switchMap: minden új keresőkifejezésnél megszakítja (leiratkozik) az előző, még folyamatban lévő kérésről, így csak a legutóbbi számít. Kiegészítve debounceTime-mal (várni a gépelés szünetére) és distinctUntilChanged-del (ne indíts kérést azonos kifejezésre), ez adja a robusztus, élő kereső mintát.",
+      "code": "this.searchTerm$.pipe(\n  debounceTime(300),\n  distinctUntilChanged(),\n  switchMap(term => this.api.search(term))\n)",
+      "appFile": null,
+      "tags": [
+        "rxjs",
+        "haladó"
+      ]
+    },
+    {
+      "id": 156,
+      "topic": "forms",
+      "level": "medior",
+      "q": "Mi a különbség a setValue és a patchValue között?",
+      "a": "Mindkettő reactive form értékét állítja. A setValue az EGÉSZ form/csoport értékét megköveteli — minden mezőt meg kell adni, különben hibát dob (szigorú, teljes csere). A patchValue részleges: csak a megadott mezőket frissíti, a többit érintetlenül hagyja (rugalmas). Tipikusan patchValue-t használsz meglévő adat betöltésekor, ha nem akarsz minden mezőt felsorolni.",
+      "code": "this.form.patchValue({ name: 'Anna' }); // csak a name-et állítja",
+      "appFile": null,
+      "tags": [
+        "forms"
+      ]
+    },
+    {
+      "id": 157,
+      "topic": "change",
+      "level": "senior",
+      "q": "Mi a zoneless Angular, és mit jelent a gyakorlatban?",
+      "a": "A zoneless mód azt jelenti, hogy az Angular Zone.js NÉLKÜL fut: nincs globális aszinkron-figyelés, ami minden esemény után az egész fát ellenőrizné. Helyette a Signals (és explicit jelzések) váltják ki a change detectiont, célzottan csak ott, ahol tényleg változott valami. Előnyök: kisebb bundle (nincs Zone.js), jobb teljesítmény és kiszámíthatóbb frissítés. A gyakorlatban ez signal-alapú állapotkezelést ösztönöz; a keretrendszer fokozatosan, opcionálisan vezeti be. Éles használat előtt érdemes ellenőrizni az aktuális stabilitási státuszt.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "change-detection",
+        "signals",
+        "haladó"
+      ]
+    },
+    {
+      "id": 158,
+      "topic": "tooling",
+      "level": "junior",
+      "q": "Mi az ng generate, és mit tud generálni?",
+      "a": "Az ng generate (röviden ng g) sablonból hoz létre kódelemeket a projekt konvenciói szerint, bekötve őket a megfelelő helyre: komponens (ng g c), service (ng g s), direktíva, pipe, guard, interceptor, resolver, és több. Ez időt spórol és egységes struktúrát ad — a fájlok a helyes névkonvencióval, teszt-vázzal és (ahol kell) regisztrációval jönnek létre. Kezdőként remek módja megtanulni, hogyan néznek ki a jól strukturált Angular-elemek.",
+      "code": "ng g c features/profile\nng g s core/auth\nng g pipe shared/capitalize",
+      "appFile": null,
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": 159,
+      "topic": "architecture",
+      "level": "senior",
+      "q": "Milyen elveket követnél a komponensek méretének és felelősségének meghatározásában?",
+      "a": "A vezérelv az egyszeri felelősség: egy komponens egy dolgot csináljon jól. Ha egy komponens túl nagy (több száz sor template, sok @Input, kevert felelősségek), bontsd kisebb, fókuszált gyerekekre. Válaszd szét a smart (adat/logika) és dumb (megjelenítés) szerepeket. A közös UI-részeket emeld ki újrahasznosítható komponensekbe. A template-ből tartsd ki a bonyolult logikát (tedd a osztályba vagy pipe-ba/computed-be). A jó méret ott van, ahol a komponens neve pontosan leírja, mit csinál, és a tesztje egyszerű marad.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "architektúra",
+        "haladó"
+      ]
+    },
+    {
+      "id": 160,
+      "topic": "ssr",
+      "level": "medior",
+      "q": "Milyen kihívásokat hoz az SSR, amikre figyelni kell?",
+      "a": "Az SSR-ben a kód a szerveren fut, ahol NINCS window, document, localStorage vagy más böngésző-API — ezek közvetlen használata elhasal. Megoldás: platform-ellenőrzés (isPlatformBrowser), vagy a DOM-függő kódot a böngésző-only hookokba (afterNextRender) tenni. Figyelni kell a memóriaszivárgásra (a szerver hosszan fut), a hydration-eltérésekre (a szerver és kliens által renderelt DOM egyezzen), és a harmadik fél könyvtárakra, amelyek böngészőt feltételeznek. Cserébe jobb SEO-t és gyorsabb első megjelenítést kapsz.",
+      "code": "if (isPlatformBrowser(this.platformId)) { /* böngésző-only kód */ }",
+      "appFile": null,
+      "tags": [
+        "ssr",
+        "haladó"
+      ]
+    },
+    {
+      "id": 161,
+      "topic": "performance",
+      "level": "junior",
+      "q": "Miért jó a lazy loading a felhasználónak?",
+      "a": "Mert a felhasználó böngészője csak azt a kódot tölti le, amire épp szüksége van. Az induló oldal kicsi és gyorsan betöltődik, a ritkán használt részek (pl. egy admin-felület) kódja pedig csak akkor érkezik, ha valóban odanavigál. Ez különösen mobilon és lassabb hálózaton érezhető: gyorsabb első élmény, kevesebb letöltött adat. A felhasználó nem vár feleslegesen olyan funkciók kódjára, amelyeket sosem nyit meg.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "teljesítmény"
+      ]
+    },
+    {
+      "id": 162,
+      "topic": "di",
+      "level": "junior",
+      "q": "Miért jobb a DI, mint a függőségek kézi létrehozása?",
+      "a": "Ha egy komponens maga hozza létre a függőségeit (new TaskService()), akkor szorosan hozzá van kötve a konkrét megvalósításhoz: nehéz tesztelni (nem cserélhető mock-ra), nehéz újrahasználni, és a service-t nem lehet megosztani. A DI-vel a komponens csak KÉRI a függőséget, a keretrendszer adja — így könnyen becserélhető (teszthez mock, éleshez valódi), megosztható (singleton), és a komponens nem függ a létrehozás részleteitől. Ez a laza csatolás alapja.",
+      "code": null,
+      "appFile": null,
+      "tags": [
+        "di"
+      ]
+    },
+    {
+      "id": 163,
+      "topic": "typescript",
+      "level": "medior",
+      "q": "Mik a readonly és a const assertion?",
+      "a": "A readonly egy property-t írásvédetté tesz a példányosítás után — a fordító hibát jelez, ha módosítani próbálod. Jó az immutable adatmodellekhez. A const assertion (as const) egy literált a legszűkebb, csak-olvasható típusára rögzít: pl. egy tömb readonly tuple-lé, egy objektum readonly, konkrét literal-típusú mezőkkel válik. Ez hasznos konstansoknál és union-típusok leszármaztatásánál, mert megőrzi a pontos literal-értékeket a tág típus helyett.",
+      "code": "const roles = ['admin', 'user'] as const; // readonly ['admin','user']\ntype Role = typeof roles[number];          // 'admin' | 'user'",
+      "appFile": null,
+      "tags": [
+        "typescript",
+        "haladó"
+      ]
+    },
+    {
+      "id": 164,
+      "topic": "components",
+      "level": "medior",
+      "q": "Hogyan kezelnéd a betöltési és hibaállapotot egy adat-vezérelt komponensben?",
+      "a": "Explicit állapotokkal, nem csak 'van adat / nincs adat' bináris logikával. Egy tiszta megközelítés: külön jelezni a loading, error és success állapotot (pl. egy állapot-objektummal vagy külön signalokkal/observable-ökkel), és a template-ben @if/@switch-csel a megfelelő nézetet mutatni (skeleton/spinner, hibaüzenet újrapróbálkozás-gombbal, vagy a tartalom). Így a felhasználó mindig érti, mi történik, és a hibából van kiút. Az async pipe + a HTTP catchError szépen összeáll ezzel.",
+      "code": "@if (loading()) { <app-spinner /> }\n@else if (error()) { <p>Hiba. <button (click)=\"retry()\">Újra</button></p> }\n@else { <app-list [items]=\"data()\" /> }",
+      "appFile": null,
+      "tags": [
+        "komponens",
+        "ux"
+      ]
+    },
+    {
+      "id": 165,
+      "topic": "rxjs",
+      "level": "junior",
+      "q": "Mi a tap operátor?",
+      "a": "A tap egy 'mellékhatás' operátor: hozzáfér a folyamon átmenő értékekhez anélkül, hogy módosítaná őket. Tipikus használat: naplózás (debug), egy loading-jelző ki/bekapcsolása, vagy analytics-esemény küldése. Mivel nem alakítja az adatot, a lánc többi része érintetlen marad. Gondolj rá úgy, mint egy 'megfigyelési pontra' a pipeline-ban.",
+      "code": "source$.pipe(\n  tap(v => console.log('érték:', v)),\n  map(v => v * 2)\n)",
+      "appFile": null,
+      "tags": [
+        "rxjs"
+      ]
+    },
+    {
+      "id": 166,
+      "topic": "http",
+      "level": "junior",
+      "q": "Hogyan iratkozol fel egy HTTP-kérésre a komponensben?",
+      "a": "Kétféleképp. (1) A template-ben async pipe-pal: a service Observable-jét egy mezőbe teszed, és @if/@for + | async fogyasztja — ez automatikusan le is iratkozik, ezért ajánlott. (2) Manuálisan subscribe()-pal a komponensben, ahol a callbackben feldolgozod az eredményt — ilyenkor figyelj a leiratkozásra (bár egyszeri HTTP-kérésnél a folyam magától befejeződik). Az async pipe a tisztább, biztonságosabb alapértelmezés.",
+      "code": "// Ajánlott:\nusers$ = this.userService.getUsers();\n// template: @for (u of (users$ | async); track u.id) { ... }",
+      "appFile": "src/app/components/users.component.ts",
+      "tags": [
+        "http"
+      ]
+    }
+  ]
+}
